@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap");
+
+.App {
+  overflow: hidden;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.bg {
+  margin: 0 auto;
+
+  /* position: absolute; */
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #f0f2f5;
+  opacity: 1;
+  z-index: -99;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.container {
+  /* border: 1px solid; */
+  max-height: 75px;
+  z-index: 9999;
+  inset: 16px;
+  /* pointer-events: none; */
+  /* background-color: #fefefe; */
+}
+
+/* 1000px above screen */
+
+@media (min-width: 950px) {
+  .screen {
+    max-width: 390px;
+    max-height: 844px;
+    margin: 0 auto;
+    width: 50%;
+  }
+}
+
+/* medium screen */
+@media (min-width: 767px) {
+}
+/* small screen */
+
+@media (min-width: 300px) {
+  .container {
+    width: 100%;
+    height: 106px;
+  }
+
+  .MainContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+  }
+
+  .merchantHeader {
+    margin-top: 28px;
+    /* height: 35px; */
+    display: flex;
+    /* border: 1px solid red; */
+    justify-content: space-around;
+  }
+}
+
+.bg {
+  min-height: 100vh;
+}
+
+.app_loader {
+  /* border: 1px solid red; */
+  width: 400px;
+  text-align: center;
+  position: fixed;
+  top: 45%;
+  left: 49.8%;
+  transform: translate(-50%, -50%);
+}
+
+.screen {
+  /* border: 1px solid red; */
+}
+
+.loadingText {
+  font-weight: 500;
+  position: fixed;
+  top: 51%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.quote {
+  opacity: 0.7;
+  text-align: center;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.processing {
+  margin-top: -2px;
+  font-weight: 500;
+}
