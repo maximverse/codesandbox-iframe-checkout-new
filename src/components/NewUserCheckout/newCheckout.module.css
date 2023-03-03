@@ -1,6 +1,69 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap");
 
+/* .iframe {
+  position: fixed;
+  z-index: 999;
+  inset: 16px;
+  pointer-events: none;
+} */
+iframe {
+  pointer-events: none;
+}
+
+/* loading checkout h4 */
+.krDUTW {
+  margin: 0px;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 600;
+}
+.bjoOsA {
+  width: 100%;
+  display: flex;
+  color: rgb(51, 51, 51);
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 1;
+  transition: opacity 240ms ease-in-out 0s;
+}
+
+.inner-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.loader {
+  border-radius: 50%;
+  width: 9em;
+  height: 9em;
+  margin: 0 auto;
+  font-size: 3px;
+  position: relative;
+  text-indent: -9999em;
+  border: 1.1em solid rgba(0, 0, 0, 0.2);
+  border-left-color: #000;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 1.1s linear infinite;
+  animation: load8 1.1s linear infinite;
+}
+
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 9em;
+  height: 9em;
+}
+/* finished loading container */
+
 .App {
   overflow: hidden;
   font-family: "Inter", "Segoe UI", sans-serif;
@@ -40,13 +103,15 @@
   font-family: "Roboto";
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 28px;
   margin-top: 5px;
-
   /* Black Text */
 
   color: #01010f;
+}
+.merchantName:hover {
+  cursor: default;
 }
 
 .spacing {
@@ -165,7 +230,8 @@
 }
 
 .checkMark {
-  height: 18px;
+  height: 14px;
+  margin-bottom: 2px;
 }
 
 .cart {

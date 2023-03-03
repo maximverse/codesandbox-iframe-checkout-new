@@ -1,0 +1,146 @@
+	const k = "merchantId=" + a,
+						E = "storeCode=" + c,
+						ut = "src=" + o;
+					let l = (r ? "https://staging.checkoutv2.instant.one/" : "https://checkoutv2.instant.one/") + "?" + E + "&" + k + "&" + ut;
+					return i && (i = i.map(g => {
+						const B = g.productIdentifier.sku;
+						return B ? {
+							sku: B,
+							qty: g.qty,
+							options: g.options
+						} : {
+							productId: g.productIdentifier.productId,
+							qty: g.qty,
+							options: g.options
+						}
+					})), d && (l = l + "&currencyCode=" + d), i && (l = l + "&items=" + encodeURIComponent(JSON.stringify(i))), n && (l = l + "&cartId=" + n), m && (l = l + "&customer=" + JSON.stringify(m)), u && (l = l + "&address=" + JSON.stringify(u)), b && (l = l + "&sessionJwt=" + b), y && (l = l + "&gaId=" + y), h && (l = l + "&gaVersion=" + h), window.Instant.appId.indexOf("camerapro") >= 0 && (l = l + "&confirm=true"), l
+				},
+
+--they get the sfpro display medium and regular font.
+storeCode, merchantId, src, items, cartId, currencyCode
+https://checkoutv2.instant.one/?storeCode=au&merchantId=12bd5548-edd7-4854-968e-1d48e0ec019b&src=pdp&items=%5B%7B%22sku%22%3A%2233HUDS%22%2C%22qty%22%3A%221%22%2C%22options%22%3A%5B%7B%22id%22%3A%2292%22%2C%22value%22%3A%2220%22%7D%2C%7B%22id%22%3A%22140%22%2C%22value%22%3A%22148%22%7D%2C%7B%22id%22%3A%22141%22%2C%22value%22%3A%2230%22%7D%5D%7D%5D
+
+				// magento2
+				https://checkoutv2.instant.one/?storeCode=default&merchantId=adorncosmetics&src=pdp&items=%5B%7B%22sku%22%3A%22MFC%22%2C%22qty%22%3A%221%22%2C%22options%22%3A%5B%7B%22id%22%3A%22230%22%2C%22value%22%3A%22131%22%7D%5D%7D%5D&cartId=720618&gaId=G-291507836&gaVersion=4
+				storeCode=default
+merchantId=adorncosmetics
+src=pdp
+items=%5B%7B%22sku%22%3A%22MFC%22%2C%22qty%22%3A%221%22%2C%22options%22%3A%5B%7B%22id%22%3A%22230%22%2C%22value%22%3A%22131%22%7D%5D%7D%5D
+cartId=720618
+gaId=G-291507836
+gaVersion=4
+
+// they inject js first, then they show loading checkout, then they sent get request
+
+
+// they use Stripe Express Connect
+
+
+// they sent a GET request to`; https://api.instant.one/cart?merchantId=adorncosmetics&storeCode=default
+
+{
+	"merchant": {
+		"name": "Adorn Cosmetics"
+	},
+	"store": {
+		"id": "e884df4f-eb5b-48c3-8967-b4f27548c991",
+		"merchantId": "adorncosmetics",
+		"code": "default",
+		"name": "Adorn Cosmetics",
+		"siteUrl": "https://www.adorncosmetics.com.au/",
+		"platformExtension": {
+			"platform": "MAGENTO",
+			"plugins": [],
+			"platformId": "1",
+			"mediaUrl": "https://www.adorncosmetics.com.au/media/"
+		},
+		"pspExtension": {
+			"psp": "STRIPE_EXPRESS_CONNECT",
+			"id": "acct_1M1feo4Do465Dttg"
+		},
+		"logoUrl": "https://instant-imgs.s3.ap-southeast-2.amazonaws.com/MERCHANT_LOGOS/ADORN_COSMETICS.webp",
+		"logoWidth": "180px",
+		"contactEmail": "advice@adorncosmetics.com.au",
+		"enableUpsell": false
+	}
+}
+
+gets taht
+
+then then send a POST request, to check if the product exists
+https://api.instant.one/cart?merchantId=adorncosmetics&storeCode=default
+
+{
+	"cart": {
+		"id": "cart_iixP6VhyJrrFR142DuEIUoFX",
+		"items": [],
+		"status": "UNCONVERTED",
+		"totals": {
+			"discounts": [],
+			"grandTotal": 0,
+			"others": [],
+			"shipping": 0,
+			"subTotal": 0,
+			"tax": 0
+		},
+		"couponCode": "",
+		"coupons": [],
+		"deliveryMethods": [
+			{
+				"deliveryType": "SHIPPING",
+				"selectedShippingMethod": "",
+				"shippingMethods": []
+			}
+		],
+		"selectedDeliveryMethod": "",
+		"customer": {
+			"phone": "",
+			"firstName": "",
+			"lastName": "",
+			"email": ""
+		},
+		"currency": "AUD",
+		"storeId": "e884df4f-eb5b-48c3-8967-b4f27548c991",
+		"giftWrap": {
+			"selected": false
+		}
+	},
+	"addedCartItems": {
+		"failed": [
+			{
+				"failureCode": "This product is out of stock.",
+				"item": {
+					"productIdentifier": {
+						"productSku": "MFC"
+					},
+					"qty": 1,
+					"options": [
+						{
+							"id": "230",
+							"value": "924"
+						}
+					]
+				},
+				"product": {
+					"attributes": [
+						{
+							"label": "Options",
+							"value": "Light Beige "
+						}
+					],
+					"imgUrls": [
+						"https://www.adorncosmetics.com.au/media/catalog/product/l/i/light_beige_cream_stick.png",
+						"https://www.adorncosmetics.com.au/media/catalog/product/l/i/light_beige_swatch_1.png",
+						"https://www.adorncosmetics.com.au/media/catalog/product/s/a/samples_ecom_1__1.png"
+					],
+					"mainImgUrl": "https://www.adorncosmetics.com.au/media/catalog/product/l/i/light_beige_cream_stick.png",
+					"name": "Light Beige Cream Mineral Foundation",
+					"options": [],
+					"platformId": "1933",
+					"sku": "MFC10.5"
+				}
+			}
+		],
+		"succeeded": []
+	}
+}
