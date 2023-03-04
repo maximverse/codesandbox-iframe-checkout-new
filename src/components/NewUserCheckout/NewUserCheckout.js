@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import newCheckout from "./newCheckout.module.css";
 import Cart from "./Cart";
 import Closed from "./Closed";
@@ -38,13 +38,6 @@ export default function NewUserCheckout() {
   };
 
   // adding data from old checkout
-
-  useExternalScripts({
-    url: "https://core.spreedly.com/iframe/iframe-v1.min.js",
-  });
-  const Spreedly = window["Spreedly"];
-  // const Spreedly = window.Spreedly;
-  // let spreedlyListening = React.useRef(false);
   const appContext = React.useContext(AppContext);
   const {
     setCartData,
@@ -67,40 +60,72 @@ export default function NewUserCheckout() {
 
   const mounted = useRef(false);
 
-  const setup = async (payload) => {
-    mounted.current = true;
-    console.log("payload ", payload);
+  useExternalScripts({
+    url: "https://core.spreedly.com/iframe/iframe-v1.min.js",
+  });
 
+  const Spreedly = window["Spreedly"];
+
+  const setupModal = async (payload) => {
+    console.log("payload ", payload);
     let cart = payload?.cart?.data;
-    let merchantApiKey = payload?.merchantApiKey;
+    // let merchantApiKey = payload?.merchantApiKey;
+    // let merchantApiKey = payload?.merchantApiKey;
+    let merchantApiKey = "43232231-650e-4bbc-bb7e-4b6ed13a0d97";
     let currencySymbol = payload?.currencySymbol;
     let currency = payload?.currency;
     let shipping_methods = payload?.shipping_methods;
     let callback_url = payload?.callback_url;
-    payload = null; // for testing. remove this later
-
+    payload = null;
     if (!payload) {
       cart = dummyPayload?.cart.data;
+      // merchantApiKey = dummyPayload?.merchantApiKey;
       merchantApiKey = dummyPayload?.merchantApiKey;
+
       currencySymbol = dummyPayload?.currencySymbol;
       currency = dummyPayload?.currency;
       shipping_methods = dummyPayload?.shipping_methods;
       callback_url = dummyPayload?.callback_url;
     }
-
     setCartData(cart);
     setMerchantKey(merchantApiKey);
     setCurrencySymbol(currencySymbol);
     setCurrency(currency);
     setShippingMethods(shipping_methods);
     setCallbackUrl(callback_url);
+    await getGatewayData({
+      merchantKey: "43232231-650e-4bbc-bb7e-4b6ed13a0d97",
+    });
+  };
 
-    // setShowModal(true);
+  const initSpreedly = () => {
+    Spreedly.init("SWquYEPZ6w7VJDE9LLDi8R0pyXV", {
+      numberEl: "spreedly-number",
+      cvvEl: "spreedly-cvv",
+    });
 
-    //
-    await getGatewayData({ merchantKey: merchantApiKey });
-    // await getCustomerData({ merchantKey: merchantApiKey });
-    //
+    //attach error listener
+    Spreedly.on("errors", function (errors) {
+      for (let i = 0; i < errors.length; i++) {
+        let error = errors[i];
+
+        console.log(error?.message);
+      }
+    });
+
+    //listen for successful cache
+    Spreedly.on("recacheReady", function (event) {
+      console.log("event recache ", event);
+    });
+
+    //on spreedly ready
+    Spreedly.on("ready", function () {
+      console.log("init spreedly ready");
+      Spreedly.setPlaceholder("number", "Card");
+      Spreedly.setPlaceholder("cvv", "CVV");
+      Spreedly.setStyle("number", "width:100%;  height:40px; font-size: 16px");
+      Spreedly.setStyle("cvv", "width:100%;  height:40px; font-size: 16px");
+    });
   };
 
   const getGatewayData = async ({ merchantKey }) => {
@@ -114,34 +139,60 @@ export default function NewUserCheckout() {
     if (res?.data?.spreedlyEnvKey) {
       // setGatewayTokens(res?.data?.gateway);
       setEnvKey(res?.data?.spreedlyEnvKey);
-      console.log("spreedlyEnvKey set!");
     }
     if (res?.error) {
-      console.log(
+      console.error(
         res?.error?.response?.data?.message ||
           "Error retrieving payment gateway"
-        // {
-        //   position: "top-right",
-        //   autoClose: 700,
-        //   hideProgressBar: false,
-        //   progress: undefined,
-        //   theme: "light",
-        // }
       );
     }
 
     return;
   };
 
+  let spreedlyListening = React.useRef(false);
+
+  const initSpreedlyListeners = () => {
+    if (spreedlyListening.current) {
+      return;
+    }
+
+    spreedlyListening.current = true;
+    Spreedly.on("ready", function () {
+      setBtnDisabled(false);
+    });
+
+    //listen for successful payment method tokenization
+    Spreedly.on("paymentMethod", function (token, pmData) {
+      chargePayment(token);
+    });
+  };
+  setupModal(payload);
+  // step 2
   React.useEffect(() => {
-    setup(payload);
-  }, [payload]);
+    if (spreedlyEnvKey) {
+      initSpreedly();
+    }
+  }, [spreedlyEnvKey]);
+  React.useEffect(() => {
+    if (Spreedly) {
+      initSpreedlyListeners();
+    }
+  }, [Spreedly]);
+
+  // step 3
+  // window["openVeryFastModal"] = (payload) => {
+  //   setupModal(payload);
+  // };
 
   // end
 
   const handlePayment = (e) => {
     e.preventDefault();
     setProcessingPayment(!processingPayment);
+
+    console.log("spreedly", Spreedly);
+
     if (true) {
       // const cardExpiry = values?.cardExpiry;
       // const entries = cardExpiry?.split("/");
@@ -153,7 +204,7 @@ export default function NewUserCheckout() {
 
       const requiredFields = {
         month: "02",
-        year: "2024",
+        year: "24",
         full_name: "alex james",
       };
 
@@ -231,7 +282,11 @@ export default function NewUserCheckout() {
             </div>
           </div>
         </div>
-
+        <input
+          type="hidden"
+          name="payment_method_token"
+          id="payment_method_token"
+        />
         <div id="MainContainer" className="fiSoQW">
           <div id="CheckoutContainer" className="oYYOn">
             <div id="CheckoutFormSectionContainer" className="fBURuJ">
@@ -810,10 +865,7 @@ export default function NewUserCheckout() {
                     />
                   </div>
                   <span id="Marginer" className="ieymL"></span>
-                  <div
-                    id="spreedly-number"
-                    className="bg-white  h-[45px] border-2 rounded-md"
-                  ></div>
+
                   <div id="RowWrapper" className="djiNSH row">
                     <h4
                       id="CompleteProfileHeaderText"
@@ -823,6 +875,17 @@ export default function NewUserCheckout() {
                     </h4>
                     <h4 id="ValidationErrorText" className="bNA-dtG"></h4>
                   </div>
+                  <label className="text-xs">Card Number</label>
+                  <div
+                    id="spreedly-number"
+                    className="bg-white  h-[45px] border-2 rounded-md"
+                  ></div>
+
+                  <label className="text-xs">CVV</label>
+                  <div
+                    id="spreedly-cvv"
+                    className={`h-[45px] border-2 rounded-md`}
+                  ></div>
                   <span id="Marginer" className="bLmTAm"></span>
                   <div id="RowWrapper" className="sc-gKPRtg djiNSH row">
                     <div
