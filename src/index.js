@@ -12,15 +12,13 @@ const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(
-  <StrictMode>
-    <Router>
-      <AppContextFC>
-        <FormContextFC>
-          <>
-            <App />
-          </>
-        </FormContextFC>
-      </AppContextFC>
-    </Router>
-  </StrictMode>
+  <Router>
+    <AppContextFC>
+      <FormContextFC>
+        <>
+          <App />
+        </>
+      </FormContextFC>
+    </AppContextFC>
+  </Router>
 );

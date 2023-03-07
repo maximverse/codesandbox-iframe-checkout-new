@@ -11,15 +11,24 @@ import { AppContext } from "../../context/AppContext";
 import * as React from "react";
 import axios from "axios";
 import "./styles.css";
+
+import {
+  Grid,
+  Button,
+  Form,
+  Header,
+  Segment,
+  Message,
+} from "semantic-ui-react";
+
 export default function NewUserCheckout() {
   const [cartOpened, setIsCartOpened] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [displayCoupon, setDisplayCoupon] = useState(false);
   const [showAddress, setShowAddress] = useState(false);
   const [processingPayment, setProcessingPayment] = useState(false);
-
+  // url query params
   const location = useLocation();
-  // console.log(location);
   const searchParams = new URLSearchParams(location.search);
   const storeCode = searchParams.get("storeCode");
   const merchantId = searchParams.get("merchantId");
@@ -27,7 +36,7 @@ export default function NewUserCheckout() {
   const items = searchParams.get("items");
   const cartId = searchParams.get("cartId");
   const currencyCode = searchParams.get("currencyCode");
-
+  // url query params but in json
   const payload = {
     storeCode: storeCode,
     merchantId: merchantId,
@@ -58,161 +67,97 @@ export default function NewUserCheckout() {
     shippingMethods,
   } = appContext;
 
-  const mounted = useRef(false);
+  const SpreedlyInWindow = window.Spreedly;
 
-  useExternalScripts({
-    url: "https://core.spreedly.com/iframe/iframe-v1.min.js",
-  });
-
-  const Spreedly = window["Spreedly"];
-
-  const setupModal = async (payload) => {
-    console.log("payload ", payload);
-    let cart = payload?.cart?.data;
-    // let merchantApiKey = payload?.merchantApiKey;
-    // let merchantApiKey = payload?.merchantApiKey;
-    let merchantApiKey = "43232231-650e-4bbc-bb7e-4b6ed13a0d97";
-    let currencySymbol = payload?.currencySymbol;
-    let currency = payload?.currency;
-    let shipping_methods = payload?.shipping_methods;
-    let callback_url = payload?.callback_url;
-    payload = null;
-    if (!payload) {
-      cart = dummyPayload?.cart.data;
-      // merchantApiKey = dummyPayload?.merchantApiKey;
-      merchantApiKey = dummyPayload?.merchantApiKey;
-
-      currencySymbol = dummyPayload?.currencySymbol;
-      currency = dummyPayload?.currency;
-      shipping_methods = dummyPayload?.shipping_methods;
-      callback_url = dummyPayload?.callback_url;
+  useEffect(() => {
+    console.log(`In spreedly payment...`);
+    if (SpreedlyInWindow) {
+      setupSpreedly();
+      console.log(`Spreedly init-ed`);
     }
-    setCartData(cart);
-    setMerchantKey(merchantApiKey);
-    setCurrencySymbol(currencySymbol);
-    setCurrency(currency);
-    setShippingMethods(shipping_methods);
-    setCallbackUrl(callback_url);
-    await getGatewayData({
-      merchantKey: "43232231-650e-4bbc-bb7e-4b6ed13a0d97",
-    });
-  };
+  }, []);
 
-  const initSpreedly = () => {
-    Spreedly.init("SWquYEPZ6w7VJDE9LLDi8R0pyXV", {
+  const setupSpreedly = () => {
+    const that = this;
+
+    // get from config
+    window.Spreedly.init("9LOCZRk9HeBm84jvnONUiFqBu0C", {
       numberEl: "spreedly-number",
       cvvEl: "spreedly-cvv",
     });
 
-    //attach error listener
-    Spreedly.on("errors", function (errors) {
-      for (let i = 0; i < errors.length; i++) {
-        let error = errors[i];
+    window.Spreedly.on("ready", function () {
+      console.log(`Spreedly ready....`);
+      // const submitButton = document.getElementById("submit-button");
+      // submitButton.disabled = false;
 
-        console.log(error?.message);
+      window.Spreedly.setParam("allow_blank_name", true);
+      window.Spreedly.setParam("allow_expired_date", true);
+      // credit card number
+      window.Spreedly.setPlaceholder("number", "Card Number");
+      window.Spreedly.setFieldType("number", "text");
+      window.Spreedly.setStyle("number", "font-size: 14px; padding: 8px;");
+      window.Spreedly.setNumberFormat("prettyFormat");
+      // cvv
+      window.Spreedly.setPlaceholder("cvv", "CVV");
+      window.Spreedly.setFieldType("cvv", "text");
+      window.Spreedly.setStyle("cvv", "font-size: 14px; padding: 8px;");
+
+      // testing
+      window.Spreedly.setValue("number", "4111111111111111");
+      window.Spreedly.setValue("cvv", "123");
+      window.Spreedly.setValue("month", 11);
+      window.Spreedly.setValue("year", 2020);
+
+      document.getElementById("month").value = 10;
+      document.getElementById("year").value = 2020;
+    });
+
+    window.Spreedly.on("errors", (errors) => {
+      for (let i = 0; i < errors.length; i++) {
+        var error = errors[i];
+        console.log(error);
+      }
+
+      that.setState({ paymentProcessing: false });
+
+      // refresh the form
+      window.Spreedly.reload();
+      document.getElementById("month").value = "";
+      document.getElementById("year").value = "";
+
+      const errorMessages = errors.map((err) => err.message);
+      that.setState({ paymentErrors: errorMessages });
+    });
+
+    window.Spreedly.on("paymentMethod", async (token, paymentMethod) => {
+      // Set the token in the hidden form field
+      console.log(`Tokenization success...`);
+      this.props.setCardToken(token, "credit-card");
+      try {
+        const paymentPayload = {
+          preauthToken: token,
+          amount: 100,
+          test: true,
+          currency: "USD",
+        };
+        await this.props.performPayment(paymentPayload, "credit-card");
+        that.setState({ paymentCaptured: true });
+        that.setState({ paymentErrors: [] });
+      } catch (e) {
+        console.error(`Cannot complete payment : ${e.message}`);
+        that.setState({ paymentErrors: [e] });
+      } finally {
+        that.setState({ paymentProcessing: false });
       }
     });
-
-    //listen for successful cache
-    Spreedly.on("recacheReady", function (event) {
-      console.log("event recache ", event);
-    });
-
-    //on spreedly ready
-    Spreedly.on("ready", function () {
-      console.log("init spreedly ready");
-      Spreedly.setPlaceholder("number", "Card");
-      Spreedly.setPlaceholder("cvv", "CVV");
-      Spreedly.setStyle("number", "width:100%;  height:40px; font-size: 16px");
-      Spreedly.setStyle("cvv", "width:100%;  height:40px; font-size: 16px");
-    });
   };
-
-  const getGatewayData = async ({ merchantKey }) => {
-    const url = "http://localhost:5000/public/payment/get-gateway";
-    const data = {
-      key: merchantKey,
-      type: "stripe",
-    };
-    const res = await axios.post(url, data).catch((err) => ({ error: err }));
-
-    if (res?.data?.spreedlyEnvKey) {
-      // setGatewayTokens(res?.data?.gateway);
-      setEnvKey(res?.data?.spreedlyEnvKey);
-    }
-    if (res?.error) {
-      console.error(
-        res?.error?.response?.data?.message ||
-          "Error retrieving payment gateway"
-      );
-    }
-
-    return;
-  };
-
-  let spreedlyListening = React.useRef(false);
-
-  const initSpreedlyListeners = () => {
-    if (spreedlyListening.current) {
-      return;
-    }
-
-    spreedlyListening.current = true;
-    Spreedly.on("ready", function () {
-      setBtnDisabled(false);
-    });
-
-    //listen for successful payment method tokenization
-    Spreedly.on("paymentMethod", function (token, pmData) {
-      chargePayment(token);
-    });
-  };
-  setupModal(payload);
-  // step 2
-  React.useEffect(() => {
-    if (spreedlyEnvKey) {
-      initSpreedly();
-    }
-  }, [spreedlyEnvKey]);
-  React.useEffect(() => {
-    if (Spreedly) {
-      initSpreedlyListeners();
-    }
-  }, [Spreedly]);
-
-  // step 3
-  // window["openVeryFastModal"] = (payload) => {
-  //   setupModal(payload);
-  // };
-
-  // end
 
   const handlePayment = (e) => {
     e.preventDefault();
     setProcessingPayment(!processingPayment);
-
-    console.log("spreedly", Spreedly);
-
-    if (true) {
-      // const cardExpiry = values?.cardExpiry;
-      // const entries = cardExpiry?.split("/");
-
-      // const month = entries[0];
-      // const year = moment(cardExpiry, "MM/YY").format("YYYY");
-
-      // const fullName = formData.fullName;
-
-      const requiredFields = {
-        month: "02",
-        year: "24",
-        full_name: "alex james",
-      };
-
-      Spreedly.tokenizeCreditCard(requiredFields);
-    }
   };
 
-  //   /?storeCode=default&merchantId=1&src=wc&items=%5B%7B%22sku%22%3A%22MFC%22%2C%22qty%22%3A%221%22%2C%22options%22%3A%5B%7B%22id%22%3A%22230%22%2C%22value%22%3A%22131%22%7D%5D%7D%5D&cartId=720618&currencyCode=usd
   const couponField = useRef();
 
   const handleCouponClick = () => {
@@ -861,7 +806,10 @@ export default function NewUserCheckout() {
                       id="firstName"
                       className="fIfmaf bjckf form-control"
                       defaultValue=""
-                      style={{ borderBottomRightRadius: 6 }}
+                      style={{
+                        borderBottomRightRadius: 6,
+                        borderRight: "1px solid lightgray",
+                      }}
                     />
                   </div>
                   <span id="Marginer" className="ieymL"></span>
@@ -876,10 +824,12 @@ export default function NewUserCheckout() {
                     <h4 id="ValidationErrorText" className="bNA-dtG"></h4>
                   </div>
                   <label className="text-xs">Card Number</label>
-                  <div
-                    id="spreedly-number"
-                    className="bg-white  h-[45px] border-2 rounded-md"
-                  ></div>
+                  <Form.Field>
+                    <div
+                      id="spreedly-number"
+                      className="bg-white  h-[45px] border-2 rounded-md"
+                    ></div>
+                  </Form.Field>
 
                   <label className="text-xs">CVV</label>
                   <div
@@ -903,7 +853,7 @@ export default function NewUserCheckout() {
                             className="sc-GKYbw fQAZmq vgs-collect-container__empty vgs-collect-container__invalid vgs-collect-container__touched"
                           >
                             <input
-                              id="spreedly-number"
+                              id="cc-number"
                               type="tel"
                               className="card-number-input css-gu6vqp invalid empty touched card-number"
                               autoComplete="cc-number"
@@ -1665,42 +1615,7 @@ export default function NewUserCheckout() {
         }}
       ></div>
 
-      {/* <div className="st-inspector">
-        <iframe></iframe>
-      </div> */}
-      {/* <div
-        style={{
-          zIndex: 2147483646,
-          position: "fixed",
-          top: "283.5px",
-          left: "612.5px",
-          width: "102.625px",
-          height: 28,
-        }}
-      ></div>
-      <div
-        style={{
-          pointerEvents: "none",
-          position: "fixed",
-          zIndex: 2147483646,
-          top: 0,
-          left: 0,
-          width: 1488,
-          height: "647.5px",
-        }}
-      >
-        <canvas
-          width={3048}
-          height={1368}
-          style={{
-            position: "relative",
-            left: "-18px",
-            top: "-18px",
-            width: 1524,
-            height: 684,
-          }}
-        ></canvas>
-      </div> */}
+ 
     </div>
   );
 }
