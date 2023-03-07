@@ -1,24 +1,27 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import App from "./App";
-import { BrowserRouter as Router } from "react-router-dom";
+import App from './components/App';
+import reducers from './reducers';
+import './index.css';
 
-//contexts
-import AppContextFC from "./context/AppContext";
-import FormContextFC from "./context/FormContext";
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
-const rootElement = document.getElementById("root");
-const root = createRoot(rootElement);
+import { BrowserRouter } from 'react-router-dom';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-root.render(
-  <Router>
-    <AppContextFC>
-      <FormContextFC>
-        <>
-          <App />
-        </>
-      </FormContextFC>
-    </AppContextFC>
-  </Router>
+const store = createStore(
+  reducers,
+  composeWithDevTools(applyMiddleware(thunk))
+);
+
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>,
+  document.getElementById('root')
 );
