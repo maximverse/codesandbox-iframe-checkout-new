@@ -86,7 +86,7 @@ function ShippingComponent() {
           <div id="RowWrapper" className="sc-gKPRtg djiNSH row">
             <input
               autoComplete="address-line2"
-              placeholder="Address line 2"
+              placeholder="Address line 2 (optional)"
               id="address2"
               className="sc-bcXHqe sc-kgTSHT fIfmaf keNUtJ form-control"
               defaultValue=""
@@ -95,6 +95,15 @@ function ShippingComponent() {
             />
           </div>
 
+          <input
+            autoComplete="state"
+            placeholder="City/Suburb"
+            id="stateRegion"
+            className="sc-bcXHqe sc-hHTYSt fIfmaf iYzbmc form-control"
+            defaultValue=""
+            tabIndex={9}
+            style={{ borderTop: 0 }}
+          />
           <input
             autoComplete="state"
             placeholder="State/Region"

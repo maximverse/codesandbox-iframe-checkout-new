@@ -1,13 +1,13 @@
 import React from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 
-import SpreedlyShell from "./spreedly/SpreedlyShell";
+import Main from "./main/Main";
 
 function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/" component={SpreedlyShell} />
+        <Route path="/" component={Main} />
       </Switch>
     </div>
   );

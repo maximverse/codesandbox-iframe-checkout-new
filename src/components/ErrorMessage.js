@@ -1,13 +1,10 @@
-import React from 'react';
-import { Message } from 'semantic-ui-react';
+import React from "react";
 
-const ErrorMessage = props => {
-  const { show, header, content } = props;
+const ErrorMessage = (props) => {
+  const { show, message } = props;
   return (
     <React.Fragment>
-      {show && (
-        <Message error header={header} content={content.toString()}></Message>
-      )}
+      {show && <p className="error" message={message.toString()}></p>}
     </React.Fragment>
   );
 };
