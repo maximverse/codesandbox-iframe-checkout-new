@@ -1,7 +1,42 @@
-import React from "react";
-import "./shipping.css";
+import React, { useState, useRef } from "react";
+
+const states = [
+  // "--Select a State--",
+  "Alabama",
+  "Alaska",
+  "Arizona",
+  // Add all 50 states here
+  "Wyoming",
+];
+
+// import "./shipping.css";
 
 function ShippingComponent() {
+  const [selectedState, setSelectedState] = useState("");
+  const [enteredShippingAddress, setEnteredShippingAddress] = useState(false);
+  const [addressLine1, setAddressLine1] = useState("");
+  const [shippingMethods, setShippingMethods] = useState([]);
+  const availableShippingMethods = shippingMethods.length;
+
+  const addrLn1 = useRef();
+  const SecondAddrLn1 = useRef();
+
+  const handleShippingAddress = () => {
+    // setEnteredShippingAddress(true);
+  };
+
+  if (addressLine1.length >= 3 && enteredShippingAddress === false) {
+    setEnteredShippingAddress(true);
+  }
+
+  // if (enteredShippingAddress) {
+  //   addrLn1.current.style.borderRadius = "6px 6px 0px 0px";
+  // }
+
+  const handleChange = (event) => {
+    setSelectedState(event.target.value);
+  };
+
   return (
     <div>
       <div id="UtilDiv" className="sc-fLcnxK ebGFBo">
@@ -23,7 +58,10 @@ function ShippingComponent() {
           defaultValue=""
         />
         <span id="Marginer" className="sc-lllmON bLmTAm" />
+
         <input
+          tabIndex={7}
+          ref={addrLn1}
           autoComplete="off"
           name="address1"
           placeholder="Address"
@@ -31,9 +69,20 @@ function ShippingComponent() {
           borderradius="6px 6px 0px 0px"
           id="address1"
           className="sc-bcXHqe sc-evzXkX fIfmaf dcghfO form-control"
-          defaultValue="5th ave"
+          value={addressLine1}
+          onClick={handleShippingAddress}
+          onChange={(e) => setAddressLine1(e.target.value)}
+          style={{
+            borderBottom: enteredShippingAddress ? "0" : "1px solid #ccc",
+            borderRadius: enteredShippingAddress ? "6px 6px 0px 0px" : "6px",
+          }}
         />
-        <div id="AddressFieldsWrapper" className="sc-kLgxMn kEOWuf">
+
+        <div
+          style={{ display: enteredShippingAddress ? "block" : "none" }}
+          id="AddressFieldsWrapper"
+          className="sc-kLgxMn kEOWuf"
+        >
           <div id="RowWrapper" className="sc-gKPRtg djiNSH row">
             <input
               autoComplete="address-line2"
@@ -41,107 +90,19 @@ function ShippingComponent() {
               id="address2"
               className="sc-bcXHqe sc-kgTSHT fIfmaf keNUtJ form-control"
               defaultValue=""
-            />
-            <input
-              autoComplete="city shipping address-level2"
-              name="city"
-              placeholder="Suburb or city"
-              id="city"
-              className="sc-bcXHqe sc-dmctIk fIfmaf eDQUpO form-control"
-              defaultValue=""
+              tabIndex={8}
+              style={{ borderRadius: 0 }}
             />
           </div>
-          <div id="RowWrapper" className="sc-gKPRtg djiNSH row">
-            <input
-              placeholder="State/Region"
-              autoComplete="province shipping address-level1"
-              id="regionAutocomplete"
-              className="sc-jSUZER bKBoaI"
-              defaultValue=""
-            />
-            <div className=" css-2b097c-container" id="region">
-              <span
-                aria-live="polite"
-                aria-atomic="false"
-                aria-relevant="additions text"
-                className="css-7pg0cj-a11yText"
-              />
-              <div className=" css-ox4o4j-control">
-                <div className=" css-1hwfws3">
-                  <div className=" css-19uk7i0-placeholder">State/Region</div>
-                  <div className="css-1g6gooi">
-                    <div className="" style={{ display: "inline-block" }}>
-                      <input
-                        autoCapitalize="none"
-                        autoComplete="off"
-                        autoCorrect="off"
-                        id="react-select-4-input"
-                        spellCheck="false"
-                        tabIndex={0}
-                        type="text"
-                        aria-autocomplete="list"
-                        defaultValue=""
-                        style={{
-                          boxSizing: "content-box",
-                          width: 2,
-                          background: "0px center",
-                          border: 0,
-                          fontSize: "inherit",
-                          opacity: 1,
-                          outline: 0,
-                          padding: 0,
-                          color: "inherit",
-                        }}
-                      />
-                      <div
-                        style={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          visibility: "hidden",
-                          height: 0,
-                          overflow: "scroll",
-                          whiteSpace: "pre",
-                          fontSize: 16,
-                          fontFamily:
-                            '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                          fontWeight: 400,
-                          fontStyle: "normal",
-                          letterSpacing: "normal",
-                          textTransform: "none",
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className=" css-1wy0on6">
-                  <span className=" css-1okebmr-indicatorSeparator" />
-                  <div
-                    className=" css-tlfecz-indicatorContainer"
-                    aria-hidden="true"
-                  >
-                    <svg
-                      height={20}
-                      width={20}
-                      viewBox="0 0 20 20"
-                      aria-hidden="true"
-                      focusable="false"
-                      className="css-8mmkcg"
-                    >
-                      <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <input name="region" type="hidden" defaultValue="" />
-            </div>
-          </div>
+
           <input
-            placeholder="Postal Code"
-            autoComplete="postal-code"
-            id="postCodeAutocomplete"
-            className="sc-jSUZER bKBoaI"
+            autoComplete="state"
+            placeholder="State/Region"
+            id="stateRegion"
+            className="sc-bcXHqe sc-hHTYSt fIfmaf iYzbmc form-control"
             defaultValue=""
+            tabIndex={9}
+            style={{ borderTop: 0 }}
           />
           <input
             autoComplete="postal-code"
@@ -149,100 +110,51 @@ function ShippingComponent() {
             id="postCode"
             className="sc-bcXHqe sc-hHTYSt fIfmaf iYzbmc form-control"
             defaultValue=""
+            tabIndex={10}
+            style={{ borderTop: 0 }}
           />
-          <div className=" css-2b097c-container" id="country">
-            <span
-              aria-live="polite"
-              aria-atomic="false"
-              aria-relevant="additions text"
-              className="css-7pg0cj-a11yText"
-            />
-            <div className=" css-lkd1b-control">
-              <div className=" css-1hwfws3">
-                <div className=" css-19uk7i0-placeholder">Country</div>
-                <div className="css-1g6gooi">
-                  <div className="" style={{ display: "inline-block" }}>
-                    <input
-                      autoCapitalize="none"
-                      autoComplete="off"
-                      autoCorrect="off"
-                      id="react-select-5-input"
-                      spellCheck="false"
-                      tabIndex={0}
-                      type="text"
-                      aria-autocomplete="list"
-                      aria-label="Country Select"
-                      defaultValue=""
-                      style={{
-                        boxSizing: "content-box",
-                        width: 2,
-                        background: "0px center",
-                        border: 0,
-                        fontSize: "inherit",
-                        opacity: 1,
-                        outline: 0,
-                        padding: 0,
-                        color: "inherit",
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        visibility: "hidden",
-                        height: 0,
-                        overflow: "scroll",
-                        whiteSpace: "pre",
-                        fontSize: 16,
-                        fontFamily:
-                          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                        fontWeight: 400,
-                        fontStyle: "normal",
-                        letterSpacing: "normal",
-                        textTransform: "none",
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className=" css-1wy0on6">
-                <span className=" css-1okebmr-indicatorSeparator" />
-                <div
-                  className=" css-tlfecz-indicatorContainer"
-                  aria-hidden="true"
-                >
-                  <svg
-                    height={20}
-                    width={20}
-                    viewBox="0 0 20 20"
-                    aria-hidden="true"
-                    focusable="false"
-                    className="css-8mmkcg"
-                  >
-                    <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <input name="country" type="hidden" defaultValue="" />
-          </div>
+          <select
+            tabIndex={11}
+            name="Country"
+            aria-label="Phone number country"
+            className="state"
+            style={{
+              borderTop: 0,
+              paddingLeft: 16,
+              borderRadius: "0 0 6px 6px",
+            }}
+          >
+            <option value="none">Select a Country</option>
+            {states.map((state) => (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            ))}
+          </select>
         </div>
-        <div id="RowWrapper" className="sc-gKPRtg djiNSH row">
-          <div id="ShippingMethodsContainer" className="sc-erijoS iaAjQw">
-            <div id="ShippingMethodMainContainer" className="sc-eZURND kOcwjy">
+
+        {enteredShippingAddress && (
+          <div id="RowWrapper" className="sc-gKPRtg djiNSH row">
+            <div id="ShippingMethodsContainer" className="sc-erijoS iaAjQw">
               <div
-                id="ShippingMethodDetailsContainer"
-                className="sc-kxtuKG lkaTfT"
-                style={{ padding: 10 }}
+                id="ShippingMethodMainContainer"
+                className="sc-eZURND kOcwjy"
               >
-                <h4 id="BodyText" className="sc-ftTHYK gMIgWT">
-                  No shipping methods available for this address
-                </h4>
+                <div
+                  id="ShippingMethodDetailsContainer"
+                  className="sc-kxtuKG lkaTfT"
+                  style={{ padding: 10 }}
+                >
+                  {availableShippingMethods === 0 && (
+                    <h4 id="BodyText" className="sc-ftTHYK gMIgWT">
+                      No shipping methods available for this address
+                    </h4>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
