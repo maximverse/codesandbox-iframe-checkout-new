@@ -2465,6 +2465,7 @@ h4 {
 input.input-error,
 select.input-error {
   border-color: #fc8181 !important;
+  border: 1px solid red !important;
 }
 .error {
   margin-top: 0.25rem;

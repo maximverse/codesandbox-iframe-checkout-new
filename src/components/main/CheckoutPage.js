@@ -45,13 +45,9 @@ function CheckoutPage({ payment }) {
               pointerEvents: "none",
             }}
           ></div>
-          <input type="hidden" name="pmnts_id" id="pmnts_id" />
+
           <Loader />
-          <input
-            type="hidden"
-            name="payment_method_token"
-            id="payment_method_token"
-          />
+
           <div id="MainContainer" className="fiSoQW">
             <div id="CheckoutContainer" className="oYYOn">
               <div id="CheckoutFormSectionContainer" className="fBURuJ">

@@ -15,6 +15,16 @@ import FooterComponent from "../layout/FooterComponent";
 import CouponComponent from "../coupon/CouponComponent";
 
 const MainFormComponent = (props) => {
+  const [processingPayment, setProcessingPayment] = useState(false);
+  const [couponValue, setCouponValue] = useState("");
+  const [phone, setPhone] = useState();
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+  const [displayCoupon, setDisplayCoupon] = useState(false);
+  const [paymentErrors, setPaymentErrors] = useState([]);
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
+  const [paymentCaptured, setPaymentCaptured] = useState(false);
+
   // form validation
   const {
     values,
@@ -31,19 +41,16 @@ const MainFormComponent = (props) => {
       fullName: "",
       email: "",
       phone: "",
+      addressLine1: "",
+      addressLine2: "",
+      city: "",
+      state: "",
+      zip: "",
     },
     validationSchema: basicSchema,
     // onSubmit
   });
-  // console.log(errors);
-  const [processingPayment, setProcessingPayment] = useState(false);
 
-  const [phone, setPhone] = useState();
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
-
-  // console.log({ month });
-  // console.log({ year });
   const inputRef = useRef(null);
 
   function handleInputChange(event) {
@@ -68,17 +75,12 @@ const MainFormComponent = (props) => {
     // Update the input field value
     event.target.value = formattedValue;
     if (formattedValue.length >= 5) {
-      // console.log("full");
-
       const arr = formattedValue.split("/");
       console.log(arr);
       setMonth(arr[0]);
       setYear("20" + arr[1]);
-      // }
     }
   }
-
-  const [displayCoupon, setDisplayCoupon] = useState(false);
 
   const couponField = useRef();
 
@@ -88,10 +90,6 @@ const MainFormComponent = (props) => {
       couponField.current.focus();
     }, 100);
   };
-
-  const [paymentErrors, setPaymentErrors] = useState([]);
-  const [paymentProcessing, setPaymentProcessing] = useState(false);
-  const [paymentCaptured, setPaymentCaptured] = useState(false);
 
   useEffect(() => {
     console.log(`In spreedly payment...`);
@@ -195,6 +193,12 @@ const MainFormComponent = (props) => {
       id="CompleteProfileMainFormContainer"
       className="fsSneX"
     >
+      <input type="hidden" name="pmnts_id" id="pmnts_id" />
+      <input
+        type="hidden"
+        name="payment_method_token"
+        id="payment_method_token"
+      />
       <div id="RowWrapper" className="djiNSH row">
         <h4 id="CompleteProfileHeaderText" className="lgqJFl eKvixq">
           Your information
@@ -225,7 +229,7 @@ const MainFormComponent = (props) => {
         defaultCountry="US"
         placeholder="Enter phone number"
         value={phone}
-        onChange={(e) => setPhone(e)}
+        onChange={(e) => setPhone(e.target.value)}
         tabIndex={2}
       />
       <div id="RowWrapper" className="djiNSH row">
@@ -337,13 +341,21 @@ const MainFormComponent = (props) => {
         </div>
       </div>
       <span id="Marginer" className="ieymL"></span>
-      <ShippingComponent />
+      <ShippingComponent
+        values={values}
+        errors={errors}
+        touched={touched}
+        handleBlur={handleBlur}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
       <span id="Marginer" className="ieymL"></span>
       <div id="CartExtraFeesMainContainer" className="hkDEcB"></div>
       <CouponComponent
         displayCoupon={displayCoupon}
         couponField={couponField}
         handleCouponClick={handleCouponClick}
+        couponValue={couponValue}
       />
       <span id="Marginer" className="ieymL"></span>
       <button

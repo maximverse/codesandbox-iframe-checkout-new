@@ -1,6 +1,11 @@
 import React from "react";
 
-function CouponComponent({displayCoupon, couponField, handleCouponClick}) {
+function CouponComponent({
+  displayCoupon,
+  couponField,
+  handleCouponClick,
+  couponValue,
+}) {
   return (
     <div>
       <div id="CouponCodeWrapper" className="clivIu">
@@ -14,10 +19,10 @@ function CouponComponent({displayCoupon, couponField, handleCouponClick}) {
             <div id="RowWrapper" width="100%" className="gVXtdP row">
               <div className="enuuvf">
                 <input
-                  placeholder="Enter code"
+                  placeholder="Coupon code (optional)"
                   id="CodeInput"
                   className="fIfmaf lgWrbL form-control"
-                  defaultValue=""
+                  value={couponValue}
                   ref={couponField}
                 />
                 {/* new button */}
@@ -35,9 +40,7 @@ function CouponComponent({displayCoupon, couponField, handleCouponClick}) {
           <div
             id="UtilDiv"
             className="ebGFBo"
-            // style={{ display: displayCoupon ? "block" : "hidden" }}
             style={{ display: displayCoupon ? "none" : "block" }}
-            // style={{ display: "none" }}
             onClick={handleCouponClick}
           >
             <div

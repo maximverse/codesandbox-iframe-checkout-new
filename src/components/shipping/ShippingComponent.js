@@ -11,7 +11,14 @@ const states = [
 
 // import "./shipping.css";
 
-function ShippingComponent() {
+function ShippingComponent({
+  values,
+  errors,
+  touched,
+  handleBlur,
+  handleChange,
+  handleSubmit,
+}) {
   const [selectedState, setSelectedState] = useState("");
   const [enteredShippingAddress, setEnteredShippingAddress] = useState(false);
   const [addressLine1, setAddressLine1] = useState("");
@@ -25,17 +32,13 @@ function ShippingComponent() {
     // setEnteredShippingAddress(true);
   };
 
-  if (addressLine1.length >= 3 && enteredShippingAddress === false) {
+  if (values.addressLine1.length >= 3 && enteredShippingAddress === false) {
     setEnteredShippingAddress(true);
   }
 
   // if (enteredShippingAddress) {
   //   addrLn1.current.style.borderRadius = "6px 6px 0px 0px";
   // }
-
-  const handleChange = (event) => {
-    setSelectedState(event.target.value);
-  };
 
   return (
     <div>
@@ -63,15 +66,17 @@ function ShippingComponent() {
           tabIndex={7}
           ref={addrLn1}
           autoComplete="off"
-          name="address1"
+          name="addressLine1"
           placeholder="Address"
           borderbottom="1px solid #e0e0e0"
           borderradius="6px 6px 0px 0px"
-          id="address1"
-          className="sc-bcXHqe sc-evzXkX fIfmaf dcghfO form-control"
-          value={addressLine1}
-          onClick={handleShippingAddress}
-          onChange={(e) => setAddressLine1(e.target.value)}
+          id="addressLine1"
+          className={`sc-bcXHqe sc-evzXkX fIfmaf dcghfO form-control ${
+            errors.addressLine1 && touched.addressLine1 && "input-error"
+          }`}
+          value={values.addressLine1}
+          onChange={handleChange}
+          onBlur={handleBlur}
           style={{
             borderBottom: enteredShippingAddress ? "0" : "1px solid #ccc",
             borderRadius: enteredShippingAddress ? "6px 6px 0px 0px" : "6px",
@@ -87,40 +92,61 @@ function ShippingComponent() {
             <input
               autoComplete="address-line2"
               placeholder="Address line 2 (optional)"
-              id="address2"
-              className="sc-bcXHqe sc-kgTSHT fIfmaf keNUtJ form-control"
-              defaultValue=""
+              id="addressLine2"
+              name="addressLine2"
+              className={`sc-bcXHqe sc-kgTSHT fIfmaf keNUtJ form-control ${
+                errors.addressLine2 && touched.addressLine2 && "input-error"
+              }`}
+              value={values.addressLine2}
               tabIndex={8}
               style={{ borderRadius: 0 }}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
           </div>
 
           <input
-            autoComplete="state"
+            autoComplete="city"
             placeholder="City/Suburb"
-            id="stateRegion"
-            className="sc-bcXHqe sc-hHTYSt fIfmaf iYzbmc form-control"
-            defaultValue=""
+            id="city"
+            name="city"
+            className={`sc-bcXHqe sc-hHTYSt fIfmaf iYzbmc form-control ${
+              errors.city && touched.city && "input-error"
+            }`}
             tabIndex={9}
             style={{ borderTop: 0 }}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.city}
           />
           <input
             autoComplete="state"
             placeholder="State/Region"
-            id="stateRegion"
-            className="sc-bcXHqe sc-hHTYSt fIfmaf iYzbmc form-control"
+            id="state"
+            name="state"
+            className={`sc-bcXHqe sc-hHTYSt fIfmaf iYzbmc form-control ${
+              errors.state && touched.state && "input-error"
+            }`}
             defaultValue=""
             tabIndex={9}
             style={{ borderTop: 0 }}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.state}
           />
           <input
             autoComplete="postal-code"
             placeholder="Postal code"
-            id="postCode"
-            className="sc-bcXHqe sc-hHTYSt fIfmaf iYzbmc form-control"
-            defaultValue=""
+            id="zip"
+            name="zip"
+            className={`sc-bcXHqe sc-hHTYSt fIfmaf iYzbmc form-control ${
+              errors.zip && touched.zip && "input-error"
+            }`}
             tabIndex={10}
             style={{ borderTop: 0 }}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.zip}
           />
           <select
             tabIndex={11}

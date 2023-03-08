@@ -11,5 +11,9 @@ const basicSchema = yup.object().shape({
     .min(2, "Name is too short")
     .required("Please enter your full name")
     .matches(/^\s*[\S]+(\s[\S]+)+\s*$/gms, "Please enter your full name."),
+  addressLine1: yup.string().required("Required"),
+  city: yup.string().required("Required"),
+  state: yup.string().required("Required"),
+  zip: yup.string().required("Required"),
 });
 export default basicSchema;
