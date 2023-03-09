@@ -15,5 +15,6 @@ const basicSchema = yup.object().shape({
   city: yup.string().required("Required"),
   state: yup.string().required("Required"),
   zip: yup.string().required("Required"),
+  countrySelect: yup.string().required("Required"),
 });
 export default basicSchema;

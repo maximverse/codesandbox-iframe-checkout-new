@@ -25,6 +25,11 @@ const MainFormComponent = (props) => {
   const [paymentProcessing, setPaymentProcessing] = useState(false);
   const [paymentCaptured, setPaymentCaptured] = useState(false);
 
+  const [countryValue, setCountryValue] = useState("");
+  const handleCountry = (selectedOption) => {
+    setCountryValue(selectedOption);
+  };
+
   // form validation
   const {
     values,
@@ -46,6 +51,7 @@ const MainFormComponent = (props) => {
       city: "",
       state: "",
       zip: "",
+      countrySelect: "",
     },
     validationSchema: basicSchema,
     // onSubmit
@@ -229,7 +235,7 @@ const MainFormComponent = (props) => {
         defaultCountry="US"
         placeholder="Enter phone number"
         value={phone}
-        onChange={(e) => setPhone(e.target.value)}
+        onChange={(value) => setPhone(value)}
         tabIndex={2}
       />
       <div id="RowWrapper" className="djiNSH row">
@@ -348,6 +354,8 @@ const MainFormComponent = (props) => {
         handleBlur={handleBlur}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
+        handleCountry={handleCountry}
+        countryValue={countryValue}
       />
       <span id="Marginer" className="ieymL"></span>
       <div id="CartExtraFeesMainContainer" className="hkDEcB"></div>
@@ -365,7 +373,15 @@ const MainFormComponent = (props) => {
         id="submit-button"
         className={`submit-btn ${
           (values.fullName.length === 0 && "disabled") ||
-          (errors.fullName && "disabled")
+          (errors.fullName && "disabled") ||
+          countryValue === ""
+            ? "disabled"
+            : "" ||
+              (values.addressLine1 === "" && "disabled") ||
+              (values.city === "" && "disabled") ||
+              (values.state === "" && "disabled") ||
+              (values.zip === "" && "disabled") ||
+              (year.length === 0 && "disabled")
         }`}
         tabIndex={12}
       >

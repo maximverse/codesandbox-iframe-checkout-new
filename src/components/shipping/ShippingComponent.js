@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import Select from "react-select";
+import countryList from "react-select-country-list";
 
 const states = [
   // "--Select a State--",
@@ -9,7 +11,40 @@ const states = [
   "Wyoming",
 ];
 
-// import "./shipping.css";
+const options = countryList()
+  .getData()
+  .map((country) => ({
+    label: country.label,
+    value: country.value,
+  }));
+
+const customStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    border: "1px solid #ced4da",
+    borderTop: "none",
+    boxShadow: state.isFocused ? "none" : "none",
+    height: "45px",
+    fontSize: "16px",
+    borderRadius: "0",
+    borderBottomRightRadius: "6px",
+    borderBottomLeftRadius: "6px",
+    paddingLeft: "5px",
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? "#61dafb" : "white",
+    color: state.isFocused ? "white" : "black",
+    "&:hover": {
+      backgroundColor: "#61dafb",
+      color: "white",
+    },
+  }),
+  singleValue: (provided, state) => ({
+    ...provided,
+    color: state.isFocused ? "#61dafb" : "black",
+  }),
+};
 
 function ShippingComponent({
   values,
@@ -18,27 +53,17 @@ function ShippingComponent({
   handleBlur,
   handleChange,
   handleSubmit,
+  handleCountry,
+  countryValue,
 }) {
-  const [selectedState, setSelectedState] = useState("");
   const [enteredShippingAddress, setEnteredShippingAddress] = useState(false);
-  const [addressLine1, setAddressLine1] = useState("");
   const [shippingMethods, setShippingMethods] = useState([]);
   const availableShippingMethods = shippingMethods.length;
-
   const addrLn1 = useRef();
-  const SecondAddrLn1 = useRef();
-
-  const handleShippingAddress = () => {
-    // setEnteredShippingAddress(true);
-  };
 
   if (values.addressLine1.length >= 3 && enteredShippingAddress === false) {
     setEnteredShippingAddress(true);
   }
-
-  // if (enteredShippingAddress) {
-  //   addrLn1.current.style.borderRadius = "6px 6px 0px 0px";
-  // }
 
   return (
     <div>
@@ -50,7 +75,7 @@ function ShippingComponent({
           >
             Shipping address
           </h4>
-          <h4 id="ValidationErrorText" className="sc-kerCdx kNhFIc" />
+          {/* <h4 id="ValidationErrorText" className="sc-kerCdx kNhFIc" /> */}
         </div>
         <input
           placeholder="Country"
@@ -148,24 +173,13 @@ function ShippingComponent({
             onBlur={handleBlur}
             value={values.zip}
           />
-          <select
-            tabIndex={11}
-            name="Country"
-            aria-label="Phone number country"
-            className="state"
-            style={{
-              borderTop: 0,
-              paddingLeft: 16,
-              borderRadius: "0 0 6px 6px",
-            }}
-          >
-            <option value="none">Select a Country</option>
-            {states.map((state) => (
-              <option key={state} value={state}>
-                {state}
-              </option>
-            ))}
-          </select>
+          <Select
+            options={options}
+            value={countryValue}
+            onChange={handleCountry}
+            placeholder="Select a country"
+            styles={customStyles}
+          />
         </div>
 
         {enteredShippingAddress && (
@@ -196,3 +210,30 @@ function ShippingComponent({
 }
 
 export default ShippingComponent;
+
+{
+  /* <select
+            tabIndex={11}
+            name="countrySelect"
+            id="countrySelect"
+            aria-label="Phone number country"
+            className={`state ${
+              errors.countrySelect && touched.countrySelect && "input-error"
+            }`}
+            style={{
+              borderTop: 0,
+              paddingLeft: 16,
+              borderRadius: "0 0 6px 6px",
+            }}
+            onChange={handleChange}
+            value={values.countrySelect}
+            onBlur={handleBlur}
+          >
+            <option value="">Select a Country</option>
+            {states.map((state) => (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            ))}
+          </select> */
+}
