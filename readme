@@ -1,0 +1,30 @@
+step 1. learn how to build wordpress lpugin
+
+- go thorugh all the links and build
+- go through wordpress docs
+
+step 1.1 read through the api
+step 1.2 read through the cycopay modal
+step 2. learn how to build woocommerce plugin
+
+- woocommerce docs
+  step 3. filelist woocommerce tutorial
+  step 4. re-read through the api
+
+-should put the product id inside the payment link
+--> how can I get the products id and pass it into a button and generate a link and put it into an iframe
+-should connect to the woocommerce store via oauth to fetch the products data
+
+go on chatgpt:
+how to get products data from woocommerce site via mern
+how do i get the consumerkey via oauth
+how can i use oauth to connect with a woocommerce store a react and express app
+
+I'm creating a 1-click checkout plugin for woocommerce, similar to Fast.co Checkout
+
+give me the code to create a woocommerce plugin that:
+
+- will add a button called instant checkout on every product page.
+- when that button is clicked, it should show a container that acts as an overlay
+- inside that overlay it should inject an iframe with a certain payment link
+- when the button is clicked it should generate specific query parameters that will be sent as to that payment link
