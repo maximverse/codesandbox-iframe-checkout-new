@@ -5,8 +5,11 @@ import { useLocation } from "react-router-dom";
 import { useSpring } from "react-spring";
 import "../styles.css";
 import MainFormComponent from "../MainForm/MainFormComponent";
+import ReturningPage from './ReturningPage'
 
 function CheckoutPage({ payment }) {
+  const [returningUser, setReturningUser] = useState(true)
+
   const [cartOpened, setIsCartOpened] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   // url query params
@@ -57,7 +60,10 @@ function CheckoutPage({ payment }) {
                     cartOpened={cartOpened}
                   />
                   <div id="selectedDeliveryMethod" value="SHIPPING"></div>
-                  <MainFormComponent payload={payload} payment={payment} />
+                  {!returningUser && <MainFormComponent payload={payload} payment={payment} />}
+                  {returningUser && <ReturningPage payload={payload} payment={payment} />}
+                  
+
                 </div>
               </div>
             </div>
