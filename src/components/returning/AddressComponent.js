@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import WarningSvg from "../assets/WarningSvg";
+import CheckSvg from "../assets/CheckSvg";
+import "./AddressComponentStyles.css";
 
-function AddressComponent() {
+function AddressComponent({ orderState, error }) {
+  const [clicked, setClicked] = React.useState(false);
+
+  const handleClicked = () => {
+    setClicked(!clicked);
+  };
+
+  const [showNewAddressForm, setShowNewAddressForm] = useState(true);
+
   return (
     <div>
       <div id="addressSection AccordionParent" className="sc-cfQIsQ dNczxK">
         <div id="addressSection AccordionButton" className="sc-jDfIjF czXqCR">
-          <button id="OrderPlacedPageGridCell" className="sc-hQIyOC bVOsmc">
+          <button
+            onClick={handleClicked}
+            id="OrderPlacedPageGridCell"
+            className="sc-hQIyOC bVOsmc"
+          >
             <div id="SummarisedSection" className="sc-hgRfpC foWCkQ">
               <div id="SectionLeftContainer" className="sc-fiSPbx khYJsg">
-                {error.msg_code ==
-                "shipping_not_available_for_selected_address" ? (
+                {error.true &&
+                error.msg_code ==
+                  "shipping_not_available_for_selected_address" ? (
                   <WarningSvg />
                 ) : (
                   <CheckSvg />
@@ -58,7 +74,7 @@ function AddressComponent() {
         </div>
         <div
           id="addressSection AccordionExpansion"
-          className="sc-bJYTlW gPqmkd hide"
+          className={`sc-bJYTlW gPqmkd ${!clicked && "hide"}`}
         >
           <div id="ExpandedSection" className="sc-gelMue fOcJJx">
             <div id="ShippingAddressFormContainer" className="sc-eyLAWx eTwXdx">
@@ -123,29 +139,202 @@ function AddressComponent() {
                   </h4>
                 </div>
               </div>
-              <button id="PlusButtonIconContainer" className="sc-gXnjX kDBOCB">
-                <svg
-                  stroke="currentColor"
-                  fill="currentColor"
-                  strokeWidth={0}
-                  viewBox="0 0 24 24"
-                  id="PlusIcon"
-                  className="sc-byHATT bVqivu"
-                  height="1em"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z" />
-                </svg>
+              <div
+                onClick={showNewAddressForm}
+                id="PlusButtonIconContainer"
+                className="sc-gXnjX kDBOCB"
+              >
                 <h4
                   id="SmallBodyText"
                   color="black"
                   className="sc-dGQEGF sc-iuxOeI hBmljY fRame"
                 >
-                  Use a different address
+                  Or use a different address
                 </h4>
-              </button>
-              <div id="AddNewItem" className="sc-cqQeAO cytDLw" />
+              </div>
+              <div id="AddNewItem" className="sc-cqQeAO kDAfbG">
+                <div
+                  padding={0}
+                  id="RowWrapper"
+                  className="sc-ACYlI gcPwkQ row"
+                >
+                  <h4 id="ErrorValidationText" className="sc-islFiG eRlraK" />
+                </div>
+                <input
+                  placeholder="Country"
+                  name="country"
+                  autoComplete="country country-name"
+                  id="countryAutocomplete"
+                  className="sc-jSUZER bKBoaI"
+                  defaultValue=""
+                />
+                <span id="Marginer" className="sc-lllmON bLmTAm" />
+                <input
+                  autoComplete="off"
+                  name="address1"
+                  placeholder="Address"
+                  borderbottom="1px solid #e0e0e0"
+                  borderradius="6px 6px 0px 0px"
+                  id="address1"
+                  className="sc-bcXHqe sc-evzXkX fIfmaf dcghfO form-control pac-target-input"
+                  defaultValue="Fifth Avenue"
+                />
+                <div id="AddressFieldsWrapper" className="sc-kLgxMn kEOWuf">
+                  <div id="RowWrapper" className="sc-gKPRtg djiNSH row">
+                    <input
+                      autoComplete="address-line2"
+                      placeholder="Address line 2"
+                      id="address2"
+                      className="sc-bcXHqe sc-kgTSHT fIfmaf keNUtJ form-control"
+                      defaultValue=""
+                    />
+                    <input
+                      autoComplete="city shipping address-level2"
+                      name="city"
+                      placeholder="Suburb or city"
+                      id="city"
+                      className="sc-bcXHqe sc-dmctIk fIfmaf eDQUpO form-control"
+                      defaultValue="Singapore"
+                    />
+                  </div>
+                  <div id="RowWrapper" className="sc-gKPRtg djiNSH row">
+                    <input
+                      placeholder="State/Region"
+                      autoComplete="province shipping address-level1"
+                      id="regionAutocomplete"
+                      className="sc-jSUZER bKBoaI"
+                      defaultValue=""
+                    />
+                    <input
+                      placeholder="State/Region"
+                      autoComplete="province shipping address-level1"
+                      name="region"
+                      id="region"
+                      className="sc-bcXHqe sc-hTRxPq fIfmaf jpnxkN form-control"
+                      defaultValue=""
+                    />
+                  </div>
+                  <input
+                    placeholder="Postal Code"
+                    autoComplete="postal-code"
+                    id="postCodeAutocomplete"
+                    className="sc-jSUZER bKBoaI"
+                    defaultValue=""
+                  />
+                  <input
+                    autoComplete="postal-code"
+                    placeholder="Postal code"
+                    id="postCode"
+                    className="sc-bcXHqe sc-hHTYSt fIfmaf iYzbmc form-control"
+                    defaultValue={10001}
+                  />
+                  <div className=" css-2b097c-container" id="country">
+                    <span
+                      aria-live="polite"
+                      aria-atomic="false"
+                      aria-relevant="additions text"
+                      className="css-7pg0cj-a11yText"
+                    />
+                    <div className=" css-lkd1b-control">
+                      <div className=" css-1hwfws3">
+                        <div className=" css-107bg7t-singleValue">
+                          Singapore
+                        </div>
+                        <div className="css-1g6gooi">
+                          <div className="" style={{ display: "inline-block" }}>
+                            <input
+                              autoCapitalize="none"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              id="react-select-3-input"
+                              spellCheck="false"
+                              tabIndex={0}
+                              type="text"
+                              aria-autocomplete="list"
+                              aria-label="Country Select"
+                              defaultValue=""
+                              style={{
+                                boxSizing: "content-box",
+                                width: 2,
+                                background: "0px center",
+                                border: 0,
+                                fontSize: "inherit",
+                                opacity: 1,
+                                outline: 0,
+                                padding: 0,
+                                color: "inherit",
+                              }}
+                            />
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: 0,
+                                left: 0,
+                                visibility: "hidden",
+                                height: 0,
+                                overflow: "scroll",
+                                whiteSpace: "pre",
+                                fontSize: 16,
+                                fontFamily:
+                                  '-apple-system, "system-ui", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                                fontWeight: 400,
+                                fontStyle: "normal",
+                                letterSpacing: "normal",
+                                textTransform: "none",
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className=" css-1wy0on6">
+                        <span className=" css-1okebmr-indicatorSeparator" />
+                        <div
+                          className=" css-tlfecz-indicatorContainer"
+                          aria-hidden="true"
+                        >
+                          <svg
+                            height={20}
+                            width={20}
+                            viewBox="0 0 20 20"
+                            aria-hidden="true"
+                            focusable="false"
+                            className="css-8mmkcg"
+                          >
+                            <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <input name="country" type="hidden" defaultValue="SG" />
+                  </div>
+                </div>
+                <div
+                  id="AddNewShippingAddressButtonContainer"
+                  className="sc-fuRDZQ kSuswy"
+                >
+                  <div
+                    id="AddressFormButtonsWrapper"
+                    className="sc-iiNlcH fTqYuU"
+                  >
+                    <button className="sc-jeToga gHUInR">
+                      <h4
+                        color="black"
+                        className="sc-dGQEGF sc-iuxOeI hBmljY fRame"
+                      >
+                        Cancel
+                      </h4>
+                    </button>
+                    <button type="submit" className="sc-kIRMQU iNPIBA">
+                      <h4
+                        color="white"
+                        className="sc-dGQEGF sc-iuxOeI fcIKhQ eNgvW"
+                      >
+                        Save address
+                      </h4>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

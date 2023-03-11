@@ -24,7 +24,40 @@ I'm creating a 1-click checkout plugin for woocommerce, similar to Fast.co Check
 
 give me the code to create a woocommerce plugin that:
 
-- will add a button called instant checkout on every product page.
-- when that button is clicked, it should show a container that acts as an overlay
-- inside that overlay it should inject an iframe with a certain payment link
-- when the button is clicked it should generate specific query parameters that will be sent as to that payment link
+1. Prepare the pasics (name and requirements).
+   Before you start working with the actual code and files of your plugin, you'll want to do a little work to prepare the basics.
+
+First, you'll want to clearly work out the requirements for your plugin before you start coding. Here are some common questions that you should be able to answer:
+
+What are the features of the plugin?
+--Should display a button on product page and checkout pay called pay in 1 click, near the add to cart button
+--When clicked, it should add query params to a link: checkout.veryfast.com/ src=wc&merchantId&productId&qty=1&cartId=
+--It should create an overlay after clicked
+--The overlay should display the payment link in an iframe
+
+React side:
+-Payment link will fetch the productId from the query params
+-it will display in cart
+-after address is entered it will display available shipping methods
+
+Express side:
+-/getProduct route -> should fetch product data and locate with id
+-/createOrder route -> after clicks checkcout, will create order
+-/getStatus route -> will set order as compleete if success ,r will set order is failed
+
+How will users control those features?
+--The users will click
+
+What input does the plugin need to accept from users?
+--A product add to cart or click on the pay in 1 click button on the product page
+What will the front-end design look like (if applicable)?
+--Fast checkout
+Will the plugin integrate with other plugins or services?
+--The plugin will integrate with woocommerce
+What potential compatibility issues might the plugin have?
+--new woocommmerce version( new checkout APIs )
+
+what i will do:
+-pass the product id inside the link
+-get the product id, data, from express
+-get the data above, and insert into cart

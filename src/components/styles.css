@@ -1809,7 +1809,7 @@ h4 {
 }
 @media only screen and (max-width: 450px) {
   .hWPlEc {
-    width: 100%;
+    width: 100vw;
   }
 }
 .bVxARY {
