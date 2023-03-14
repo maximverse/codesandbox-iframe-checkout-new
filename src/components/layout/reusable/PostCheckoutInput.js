@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import WarningSvg from "../../assets/WarningSvg";
-import CheckSvg from "../../assets/CheckSvg";
-import PencilSvg from "../../assets/PencilSvg";
+import WarningSvg from "../../../assets/WarningSvg";
+import CheckSvg from "../../../assets/CheckSvg";
+import PencilSvg from "../../../assets/PencilSvg";
 
 function PostCheckoutInput(props) {
   const { error, orderState } = props;

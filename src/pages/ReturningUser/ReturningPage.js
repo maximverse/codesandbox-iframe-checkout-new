@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import PostCheckoutInput from "../layout/reusable/PostCheckoutInput";
-import AddressDropdown from "../OneTimeComponents/AddressDropdown.js";
-import ShippingDropdown from "../OneTimeComponents/ShippingDropdown/ShippingDropdown.js";
-import PaymentDropdown from "../OneTimeComponents/PaymentDropdown/PaymentDropdown";
-import OrderUser from "../OneTimeComponents/OrderUser/OrderUser";
-import OrderItem from "../layout/reusable/orderitem/OrderItem.js";
-import OrderFooter from "../OneTimeComponents/OrderFooter.js";
+import PostCheckoutInput from "../../components/layout/reusable/PostCheckoutInput";
+import AddressDropdown from "../../components/OneTimeComponents/AddressDropdown.js";
+import ShippingDropdown from "../../components/OneTimeComponents/ShippingDropdown/ShippingDropdown.js";
+import PaymentDropdown from "../../components/OneTimeComponents/PaymentDropdown/PaymentDropdown";
+import OrderUser from "../../components/OneTimeComponents/OrderUser/OrderUser";
+import OrderItem from "../../components/layout/reusable/orderitem/OrderItem.js";
+import OrderFooter from "../../components/OneTimeComponents/OrderFooter.js";
 import "./cards.css";
+import CircleSvg from "../../assets/CircleSvg";
 
 function ReturningPage({ payload, payment }) {
   const [error, setError] = useState({
@@ -70,23 +71,7 @@ function ReturningPage({ payload, payment }) {
               }}
               aria-valuenow={0}
             >
-              <svg
-                className="MuiCircularProgress-svg css-13o7eu2"
-                viewBox="22 22 44 44"
-              >
-                <circle
-                  className="MuiCircularProgress-circle MuiCircularProgress-circleDeterminate css-nbfpn7"
-                  cx={44}
-                  cy={44}
-                  r="19.5"
-                  fill="none"
-                  strokeWidth={5}
-                  style={{
-                    strokeDasharray: "122.522",
-                    strokeDashoffset: "122.522px",
-                  }}
-                />
-              </svg>
+              <CircleSvg />
             </span>
           </div>
         </div>

@@ -1,6 +1,24 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import CartItem from "./reusable/CartItem";
 function CartComponent({ cartOpened }) {
+  const [productDetails, setProductDetails] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://dummyjson.com/products?limit=2")
+      .then((res) => {
+        setProductDetails(res.data.products);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  // console.log(productDetails.products);
+
+  // {
+  //   productDetails.map((product) => console.log("product:", product));
+  // }
+
   return (
     <div>
       <div
@@ -8,39 +26,10 @@ function CartComponent({ cartOpened }) {
         className="hWPlEc"
         style={{ display: cartOpened ? "flex" : "none" }}
       >
-        <div id="CartItemContainer" className="kGmMRp">
-          <div id="CartItemImgContainer" className="koqOKo">
-            <img
-              id="CartItemImg"
-              src="https://www.revereshoes.com.au/media/catalog/product/a/p/api-v1.1-rn-public_files-pim-assets-d6-3f-49-60-60493fd6da28b5ea537d22b7-images-20-b9-d0-63-63d0b920bd5bcbdd3c545eaf-Hudson-Navy-Profile-1.jpg-33HUDSNAVM100W.jpg"
-              className="cnpoae"
-            />
-          </div>
-          <div className="iKUTyA">
-            <div id="CartItemDetailsContainer" className="gIRUqr">
-              <h4 id="CartItemName" className="gsNyQL">
-                Hudson Sneaker
-              </h4>
-              <h4 id="CartItemAttribute" className="iBFNXm">
-                Colour: Navy
-              </h4>
-              <h4 id="CartItemAttribute" className="iBFNXm">
-                Width: Wide
-              </h4>
-              <h4 id="CartItemAttribute" className="iBFNXm">
-                Size: US 10
-              </h4>
-            </div>
-            <div id="CartItemRow" className="kuCSrM">
-              <h4 id="CartItemTotalPrice" className="kAJome">
-                A$179.95
-              </h4>
-              <h4 id="QtyText" className="bVxARY">
-                Qty: 1
-              </h4>
-            </div>
-          </div>
-        </div>
+        {productDetails.map((product) => (
+          <CartItem product={product} />
+        ))}
+
         <div
           id="OrderCostLineContainer"
           className="gkgEoN"

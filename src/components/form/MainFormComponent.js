@@ -2,17 +2,17 @@ import React, { useRef, useEffect, useState, Component } from "react";
 
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { setCardToken, performPayment } from "../../../actions";
-import ShippingComponent from "../../shipping/ShippingComponent";
+import { setCardToken, performPayment } from "../../actions";
+import ShippingComponent from "../shipping/ShippingComponent";
 import { useFormik } from "formik";
 import basicSchema from "../../schemas";
-import { setParams } from "../../helpers/spreedlySetup";
+import { setParams } from "../helpers/spreedlySetup";
 
 import PhoneInput from "react-phone-number-input";
 import flags from "react-phone-number-input/flags";
 import "react-phone-number-input/style.css";
-import FooterComponent from "../../layout/FooterComponent";
-import CouponComponent from "../../coupon/CouponComponent";
+import FooterComponent from "../layout/FooterComponent";
+import CouponComponent from "../ui/coupon/CouponComponent";
 
 const MainFormComponent = (props) => {
   const [processingPayment, setProcessingPayment] = useState(false);

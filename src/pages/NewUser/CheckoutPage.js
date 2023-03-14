@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import HeaderComponent from "../layout/HeaderComponent";
-import Loader from "../loader";
+import HeaderComponent from "../../components/layout/HeaderComponent";
+import Loader from "../../components/loader";
 import { useLocation } from "react-router-dom";
 import { useSpring } from "react-spring";
-import MainFormComponent from "../OneTimeComponents/MainForm/MainFormComponent";
-import ReturningPage from "./ReturningPage";
-import "../styles.css";
-import "../NewUserStyles.css";
+import MainFormComponent from "../../components/form/MainFormComponent";
+import ReturningPage from "../ReturningUser/ReturningPage";
+import "../../components/styles.css";
+import "./NewUserStyles.css";
 
 function CheckoutPage({ payment }) {
-  const [returningUser, setReturningUser] = useState(true);
+  const [returningUser, setReturningUser] = useState(false);
 
   const [cartOpened, setIsCartOpened] = useState(false);
   const [isVisible, setIsVisible] = useState(false);

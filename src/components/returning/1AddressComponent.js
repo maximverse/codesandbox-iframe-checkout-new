@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import WarningSvg from "../assets/WarningSvg";
-import CheckSvg from "../assets/CheckSvg";
+import WarningSvg from "../../assets/WarningSvg";
+import CheckSvg from "../../assets/CheckSvg";
 import "./AddressComponentStyles.css";
-import PencilSvg from "../assets/PencilSvg";
+import PencilSvg from "../../assets/PencilSvg";
 
 function AddressComponent({ orderState, error }) {
   const [clicked, setClicked] = React.useState(false);
