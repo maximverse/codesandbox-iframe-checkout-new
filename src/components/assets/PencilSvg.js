@@ -1,10 +1,11 @@
 import React from "react";
 
-function PencilSvg() {
+function PencilSvg({ handleClicked }) {
   return (
-    <div>
+    <div onClick={handleClicked}>
       {" "}
       <svg
+        onClick={handleClicked}
         width={15}
         height={15}
         viewBox="0 0 11 11"

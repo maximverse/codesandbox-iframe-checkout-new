@@ -1,0 +1,334 @@
+/*! CSS Used from: https://checkoutv2.instant.one/static/css/2.f1346150.chunk.css */
+h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+h4 {
+  font-size: calc(1.275rem + 0.3vw);
+}
+@media (min-width: 1200px) {
+  h4 {
+    font-size: 1.5rem;
+  }
+}
+svg {
+  vertical-align: middle;
+}
+button {
+  border-radius: 0;
+}
+button:focus:not(:focus-visible) {
+  outline: 0;
+}
+button {
+  -webkit-appearance: button;
+}
+button:not(:disabled) {
+  cursor: pointer;
+}
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+h4 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+}
+button {
+  touch-action: manipulation;
+}
+button {
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+}
+button {
+  overflow: visible;
+}
+button {
+  text-transform: none;
+}
+button {
+  -webkit-appearance: button;
+}
+::selection {
+  color: #fff;
+  background: #1890ff;
+}
+/*! CSS Used from: https://checkoutv2.instant.one/static/css/main.0c6734d2.chunk.css */
+h4 {
+  line-height: 1.5 !important;
+}
+/*! CSS Used from: Embedded */
+.gsNFGy {
+  width: calc(100% - 30px);
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  opacity: 1;
+  box-shadow: none;
+  border: none;
+  transition: all 1s ease-in-out 0s;
+  padding: 10px 0px;
+  background-color: transparent;
+  text-align: left;
+  cursor: default;
+}
+.gsNFGy:last-of-type {
+  border-bottom: none;
+}
+.QqfnV {
+  display: flex;
+  flex-direction: row;
+}
+.koXJqp {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+.QrSw {
+  display: flex;
+  width: fit-content;
+  max-width: 430px;
+  height: 100%;
+  flex-direction: column;
+  padding: 10px;
+  z-index: 1;
+}
+.iznuCX {
+  display: flex;
+  flex-direction: column;
+  transition: all 240ms ease-in-out 0s;
+}
+.gphsId {
+  font-size: 30px;
+  color: rgb(0, 209, 96);
+  opacity: 1;
+  transition: opacity 1s ease-in-out 0s;
+}
+.eutnCR {
+  margin: 0px;
+  width: auto;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: "SF Pro Display", sans-serif;
+}
+.krhoyp {
+  margin: 0px;
+  width: auto;
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  font-family: "SF Pro Display", sans-serif;
+}
+.hwbXvA {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "SF Pro Display", sans-serif;
+  display: -webkit-box;
+  white-space: normal;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.7);
+}
+.Kvdxo {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "SF Pro Display", sans-serif;
+  display: -webkit-box;
+  white-space: normal;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 1.5;
+  color: black;
+}
+.ifNylp {
+  height: min-content;
+  width: 100%;
+  max-width: 430px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgb(230, 230, 230);
+  margin-bottom: 0px;
+  background: white;
+  cursor: default;
+  pointer-events: none;
+}
+.jhTTzF {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  text-align: left;
+  box-shadow: none;
+  border: none;
+  border-radius: 5px;
+  background-color: white;
+  cursor: default;
+  padding: 0px;
+}
+.ftSooU {
+  max-height: 0px;
+  overflow: hidden;
+  transition: all 240ms ease 0s;
+  padding-bottom: 0px;
+  opacity: 0;
+}
+.dKUpd {
+  width: 100%;
+  position: relative;
+  display: block;
+  margin: 0px auto;
+  background-color: white;
+  height: 100%;
+  z-index: 0;
+}
+.gRAsEv {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+}
+.eEjXQC {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+.fHMXpS {
+  border-radius: 6px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+/*! CSS Used fontfaces */
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(https://checkoutv2.instant.one/static/media/SFProDisplay-BlackItalic.8b9edbe7.eot),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-BlackItalic.5304601a.woff2)
+      format("woff2"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-BlackItalic.37d70b69.woff)
+      format("woff"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-BlackItalic.ff3f2845.ttf)
+      format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(https://checkoutv2.instant.one/static/media/SFProDisplay-UltralightItalic.9d0d1cc6.eot),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-UltralightItalic.f2b9dc5c.woff2)
+      format("woff2"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-UltralightItalic.a9ed58e3.woff)
+      format("woff"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-UltralightItalic.c4c7c1e3.ttf)
+      format("truetype");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(https://checkoutv2.instant.one/static/media/SFProDisplay-HeavyItalic.2d23b351.eot),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-HeavyItalic.c92335d4.woff2)
+      format("woff2"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-HeavyItalic.fbd58aec.woff)
+      format("woff"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-HeavyItalic.345ae309.ttf)
+      format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(https://checkoutv2.instant.one/static/media/SFProDisplay-Bold.1c2dc0d8.woff2)
+      format("woff2"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-Bold.937ee7fe.woff)
+      format("woff"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-Bold.b97fea5d.ttf)
+      format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(https://checkoutv2.instant.one/static/media/SFProDisplay-LightItalic.3fa1b937.eot),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-LightItalic.835883ee.woff2)
+      format("woff2"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-LightItalic.e1eb50cd.woff)
+      format("woff"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-LightItalic.34c2bade.ttf)
+      format("truetype");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(https://checkoutv2.instant.one/static/media/SFProDisplay-Medium.062b6188.woff2)
+      format("woff2"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-Medium.d6311c23.woff)
+      format("woff"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-Medium.a69f87ee.ttf)
+      format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(https://checkoutv2.instant.one/static/media/SFProDisplay-SemiboldItalic.eef2c2cd.eot),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-SemiboldItalic.0ed6b4a7.woff2)
+      format("woff2"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-SemiboldItalic.e95f5ec2.woff)
+      format("woff"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-SemiboldItalic.6e0527ec.ttf)
+      format("truetype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(https://checkoutv2.instant.one/static/media/SFProDisplay-Regular.68dd00a1.woff2)
+      format("woff2"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-Regular.2ee6eb03.woff)
+      format("woff"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-Regular.228ddb84.ttf)
+      format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url(https://checkoutv2.instant.one/static/media/SFProDisplay-ThinItalic.79dac1e0.eot),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-ThinItalic.3f3931dc.woff2)
+      format("woff2"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-ThinItalic.fa6478c7.woff)
+      format("woff"),
+    url(https://checkoutv2.instant.one/static/media/SFProDisplay-ThinItalic.5d0ab3ba.ttf)
+      format("truetype");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}

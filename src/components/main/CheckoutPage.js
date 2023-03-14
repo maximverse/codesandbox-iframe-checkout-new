@@ -4,7 +4,7 @@ import Loader from "../loader";
 import { useLocation } from "react-router-dom";
 import { useSpring } from "react-spring";
 import "../styles.css";
-import MainFormComponent from "../MainForm/MainFormComponent";
+import MainFormComponent from "../OneTimeComponents/MainForm/MainFormComponent";
 import ReturningPage from "./ReturningPage";
 
 function CheckoutPage({ payment }) {

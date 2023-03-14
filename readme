@@ -29,6 +29,42 @@ give me the code to create a woocommerce plugin that:
 
 First, you'll want to clearly work out the requirements for your plugin before you start coding. Here are some common questions that you should be able to answer:
 
+chatgpt:
+I want the code to build a 1-click checkout plugin for woocommerce stores. The code has to be complete, with no errors.
+Description:
+I want to build a 1-click checkout product plugin simillar to Fast.co Checkout, or Rallyon checkout.
+
+Features of the plugin:
+--Admin side below:
+-Admin panel: it should have a menu where the admin would go.
+-The menu button when clicked should show a page with an input field and a button called save
+-the input field is made so the admin enters an API Key manually, the save button is that the api key must be saved
+-once the button is clicked saved, the key from the input field should be saved and it should store it.
+--Admin side end
+--Payer side:
+-On the product page, near the add to cart button, there should be another button called "Pay in 1 click"
+-On the cart page, the original woocommerce checkout button should be replaced with a button called pay in 1 click
+-When a customer goes on the product page of a woocommerce site, he should click on the pay in 1click button,
+-when clicked, it should create an overlay:
+
+1. a container that fills the whole screen, that is black with an opacity of 0.5
+2. inside that container, there should be an iframe with the link below that should fill the screen.
+3. -When clicked, it should add query params to a link (here's an example below):
+   https://checkout.veryfast.com/?currency=USD&merchantId=(the_api_key_from_the_admin_panel)&src=wc&items=
+   [{"sku":"33HUDS","qty":"1","options":[{"id":"92","value":"20"},{"id":"140","value":"148"},{"id":"141","value":"30"}]}]
+   -The query param: currency should be retrieved from the woocommerce
+   -The query param: items: should be the item, from which page the "pay in 1 click" button was clicked on
+
+Please do not give me an example of a plugin, but write a real plugin. Please adapt it as you like, if you can't adapt, just randomize some stuff. Please note that everything should be styled.
+Please write what you understood and then give me the code.
+Please do not stop writing the code and continue, i dont mind the long length.
+Please also generate the styling. Please adapt it as you like, if you can't adapt, just randomize some stuff
+
+-Resume where u left off
+
+add this later manually
+--On the woocommerce minicart widget, the original woocommerce checkout button should be replaced with a button called pay in 1 click
+
 What are the features of the plugin?
 --Should display a button on product page and checkout pay called pay in 1 click, near the add to cart button
 --When clicked, it should add query params to a link: checkout.veryfast.com/ src=wc&merchantId&productId&qty=1&cartId=
@@ -61,3 +97,112 @@ what i will do:
 -pass the product id inside the link
 -get the product id, data, from express
 -get the data above, and insert into cart
+
+bcs chatgpt breaks by parts;
+we'll break by part.
+
+I want the code to build a 1-click checkout plugin for woocommerce stores. The code has to be complete, with no errors.
+Description:
+I want to build a 1-click checkout product plugin simillar to Fast.co Checkout, or Rallyon checkout.
+
+Features of the plugin:
+--Admin side below:
+-Admin panel: it should have a menu where the admin would go.
+-The menu button when clicked should show a page with an input field and a button called save
+-the input field is made so the admin enters an API Key manually, the save button is that the api key must be saved
+-once the button is clicked saved, the key from the input field should be saved and it should store it.
+--Admin side end
+--Payer side:
+-On the product page, near the add to cart button, there should be another button called "Pay in 1 click"
+-On the cart page, the original woocommerce checkout button should be replaced with a button called pay in 1 click
+-When a customer goes on the product page of a woocommerce site, he should click on the pay in 1click button,
+-when clicked, it should create an overlay:
+
+1. a container that fills the whole screen, that is black with an opacity of 0.5
+2. inside that container, there should be an iframe with the link below that should fill the screen.
+3. -When clicked, it should add query params to a link (here's an example below):
+   https://checkout.veryfast.com/?currency=USD&merchantId=(the_api_key_from_the_admin_panel)&src=wc&items=
+   [{"sku":"33HUDS","qty":"1","options":[{"id":"92","value":"20"},{"id":"140","value":"148"},{"id":"141","value":"30"}]}]
+   -The query param: currency should be retrieved from the woocommerce
+   -The query param: items: should be the item, from which page the "pay in 1 click" button was clicked on
+
+Please do not give me an example of a plugin, but write a real plugin. Please adapt it as you like, if you can't adapt, just randomize some stuff. Please note that everything should be styled.
+Please write what you understood and then give me the code.
+Please do not stop writing the code and continue, i dont mind the long length.
+Please also generate the styling. Please adapt it as you like, if you can't adapt, just randomize some stuff
+
+part 1:
+I want the code a plugin for woocommerce sites.
+
+Features:
+-Admin panel: it should have a menu where the admin would go.
+-The menu button when clicked should show a page with an input field and a button called save
+-the input field is made so the admin enters an API Key manually, the save button is that the api key must be saved
+-once the button is clicked saved, the key from the input field should be saved and it should store it.
+--Admin side end
+
+Please also generate the styling. Please adapt it as you like, if you can't adapt, just randomize some stuff
+
+part2:
+
+I want the code to build a 1-click checkout plugin for woocommerce stores. The code has to be complete, with no errors.
+Description:
+I want to build a 1-click checkout product plugin simillar to Fast.co Checkout, or Rallyon checkout.
+
+Features of the plugin:
+--Admin side below:
+-Admin panel: it should have a menu where the admin would go.
+-The menu button when clicked should show a page with an input field and a button called save
+-the input field is made so the admin enters an API Key manually, the save button is that the api key must be saved
+-once the button is clicked saved, the key from the input field should be saved and it should store it.
+--Admin side end
+--Payer side:
+-On the product page, near the add to cart button, there should be another button called "Pay in 1 click"
+-A customer, when goes on the product page will click on the pay in 1 click button.
+-when clicked, it should create an overlay:
+
+1. a container that fills the whole screen, that is black with an opacity of 0.5
+2. inside that container, there should be an iframe with the link below that should fill the screen.
+3. the link should contain : query params (here's an example below):
+   https://checkout.com/?currency=USD&merchantId=(the_api_key_from_the_admin_panel)&src=wc&items=
+   [{"sku":"33HUDS","qty":"1","options":[{"id":"92","value":"20"},{"id":"140","value":"148"},{"id":"141","value":"30"}]}]
+   -The query param: currency should be retrieved from the woocommerce store
+   -The query param: items: should be the item, from which page the "pay in 1 click" button was clicked on
+
+Please do not give me an example of a plugin. Write a real plugin that also includes styling. Please adapt it as you like, if you can't adapt, just randomize some stuff
+Please write what you understood and then give me the code.
+
+shorter(no styling)
+
+I want the code to build a 1-click checkout plugin for woocommerce stores. The code has to be complete, with no errors.
+Description:
+I want to build a 1-click checkout product plugin simillar to Fast.co Checkout, or Rallyon checkout.
+
+Features of the plugin:
+--Admin side below:
+-Admin panel: it should have a menu where the admin would go.
+-The menu button when clicked should show a page with an input field and a button called save
+-the input field is made so the admin enters an API Key manually, the save button is that the api key must be saved
+-once the button is clicked saved, the key from the input field should be saved and it should store it.
+--Admin side end
+--Payer side:
+-On the product page, near the add to cart button, there should be another button called "Pay in 1 click"
+-A customer, when goes on the product page will click on the pay in 1 click button.
+-when clicked, it should create an overlay:
+
+1. a container that fills the whole screen, that is black with an opacity of 0.5
+2. inside that container, there should be an iframe with the link below that should fill the screen.
+3. the link should contain : query params (here's an example below):
+   https://checkout.veryfast.com/?currency=USD&merchantId=(the_api_key_from_the_admin_panel)&src=wc&items=
+   [{"sku":"33HUDS","qty":"1","options":[{"id":"92","value":"20"},{"id":"140","value":"148"},{"id":"141","value":"30"}]}]
+   -The query param: currency should be retrieved from the woocommerce store
+   -The query param: items: should be the item, including its attributes, it should be retrieved from the page the "pay in 1 click" button was clicked on
+
+Please do not give me an example of a plugin. Write a real plugin ready for production. Please adapt it as you like.
+Please write what you understood and then give me the code.
+Please make it as professional, and the code should be extremely short.
+
+^above was good
+experiment 3:
+add "You may add inline styling only where it is absolutely necessary.
+"

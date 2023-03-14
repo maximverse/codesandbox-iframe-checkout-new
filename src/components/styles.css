@@ -816,15 +816,6 @@ input[type="text"] {
   flex-direction: column;
 }
 
-.row > * {
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
-  padding-left: calc(var(--bs-gutter-x) * 0.5);
-  margin-top: var(--bs-gutter-y);
-}
-
 .lgqJFl {
   margin: 0px;
   width: auto;
@@ -1951,23 +1942,7 @@ h4 {
 iframe {
   border: 0;
 }
-.row {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(var(--bs-gutter-y) * -1);
-  margin-right: calc(var(--bs-gutter-x) * -0.5);
-  margin-left: calc(var(--bs-gutter-x) * -0.5);
-}
-.row > * {
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
-  padding-left: calc(var(--bs-gutter-x) * 0.5);
-  margin-top: var(--bs-gutter-y);
-}
+
 *,
 :after,
 :before {
@@ -2481,6 +2456,8 @@ select.input-error {
   box-shadow: none !important;
 }
 
+/* different style */
+
 /*  */
 /*! CSS Used from: Embedded */
 .anticon {
@@ -2556,24 +2533,8 @@ button:not(:disabled) {
 iframe {
   border: 0;
 }
-.row {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(var(--bs-gutter-y) * -1);
-  margin-right: calc(var(--bs-gutter-x) * -0.5);
-  margin-left: calc(var(--bs-gutter-x) * -0.5);
-}
-.row > * {
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
-  padding-left: calc(var(--bs-gutter-x) * 0.5);
-  margin-top: var(--bs-gutter-y);
-}
-.form-control {
+
+/* .form-control {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -2588,13 +2549,13 @@ iframe {
   appearance: none;
   border-radius: 0.375rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
+} */
 @media (prefers-reduced-motion: reduce) {
   .form-control {
     transition: none;
   }
 }
-.form-control:focus {
+/* .form-control:focus {
   color: #212529;
   background-color: #fff;
   border-color: #86b7fe;
@@ -2608,7 +2569,7 @@ iframe {
 .form-control:disabled {
   background-color: #e9ecef;
   opacity: 1;
-}
+} */
 *,
 :after,
 :before {
@@ -3139,7 +3100,7 @@ h4 {
   transition: none 0s ease 0s !important;
 }
 .gHggwN {
-  font-size: 30px;
+  font-size: 22px;
   font-family: "SF Pro Display", sans-serif;
   font-weight: bold;
   opacity: 1;
@@ -3307,6 +3268,7 @@ h4 {
 .hide {
   max-height: 0px !important;
   opacity: 0 !important;
+  transition: all 240ms ease 0s;
 }
 
 .MkNnu {
@@ -3989,6 +3951,7 @@ h4 {
   font-style: italic;
   font-display: swap;
 }
+/* footer button checkout */
 /* returning user page */
 /*! CSS Used from: https://checkoutv2.instant.one/static/css/2.1a775b15.chunk.css */
 h4 {
@@ -4020,7 +3983,7 @@ button {
 button:not(:disabled) {
   cursor: pointer;
 }
-.form-control {
+/* .form-control {
   display: block;
   width: 100%;
   padding: 0.375rem 0.75rem;
@@ -4055,7 +4018,7 @@ button:not(:disabled) {
 .form-control:disabled {
   background-color: #e9ecef;
   opacity: 1;
-}
+} */
 *,
 :after,
 :before {
@@ -4204,6 +4167,7 @@ h4 {
   max-height: 45px;
   transition: background-color 240ms ease-in-out 0s;
   z-index: 10;
+  transition: all 240ms;
   cursor: pointer;
 }
 .jKNQoM:disabled {
@@ -4212,6 +4176,7 @@ h4 {
 }
 .jKNQoM:hover {
   filter: brightness(1.1);
+  transition: all 240ms;
 }
 .bUJsKP {
   width: 100%;
