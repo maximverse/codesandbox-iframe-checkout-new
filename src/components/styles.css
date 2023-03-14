@@ -338,7 +338,7 @@ h2 {
   line-height: 1.5 !important;
 }
 
-.fsSneX {
+.div__class__holder {
   -webkit-box-pack: center;
   justify-content: center;
   background-color: white;
@@ -570,7 +570,7 @@ h2 {
   height: 60px;
 }
 
-.row {
+/* .row {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
   display: flex;
@@ -578,7 +578,7 @@ h2 {
   margin-top: calc(var(--bs-gutter-y) * -1);
   margin-right: calc(var(--bs-gutter-x) * -0.5);
   margin-left: calc(var(--bs-gutter-x) * -0.5);
-}
+} */
 
 .djiNSH {
   display: flex;
@@ -2694,8 +2694,6 @@ h4 {
   display: flex;
   height: 45px;
   align-items: center;
-  box-shadow: 0 0 0 1px #e0e0e0, 0 2px 4px 0 rgba(0, 0, 0, 0.07),
-    0 1px 1.5px 0 rgba(0, 0, 0, 0.05);
   -webkit-clip-path: inset(0 -15px 0 -15px);
   clip-path: inset(0 -15px 0 -15px);
 }

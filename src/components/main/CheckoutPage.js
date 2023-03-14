@@ -3,9 +3,10 @@ import HeaderComponent from "../layout/HeaderComponent";
 import Loader from "../loader";
 import { useLocation } from "react-router-dom";
 import { useSpring } from "react-spring";
-import "../styles.css";
 import MainFormComponent from "../OneTimeComponents/MainForm/MainFormComponent";
 import ReturningPage from "./ReturningPage";
+import "../styles.css";
+import "../NewUserStyles.css";
 
 function CheckoutPage({ payment }) {
   const [returningUser, setReturningUser] = useState(true);
@@ -51,10 +52,13 @@ function CheckoutPage({ payment }) {
 
           <Loader />
 
-          <div id="MainContainer" className="fiSoQW">
-            <div id="CheckoutContainer" className="oYYOn">
-              <div id="CheckoutFormSectionContainer" className="fBURuJ">
-                <div id="SectionContainer" className="lnxYvH">
+          <div id="MainContainer" className="MainContainer__holder">
+            <div id="CheckoutContainer" className="CheckoutContainer__div">
+              <div
+                id="CheckoutFormSectionContainer"
+                className="CheckoutFormSectionContainer__formSectionCotainer"
+              >
+                <div id="SectionContainer" className="SectionContainer">
                   <HeaderComponent
                     handleCart={handleCart}
                     cartOpened={cartOpened}

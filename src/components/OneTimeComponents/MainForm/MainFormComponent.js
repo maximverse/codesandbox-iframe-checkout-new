@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useState, Component } from "react";
 import { connect } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { setCardToken, performPayment } from "../../../actions";
-import ShippingComponent from "../ShippingComponent";
+import ShippingComponent from "../../shipping/ShippingComponent";
 import { useFormik } from "formik";
 import basicSchema from "../../schemas";
 import { setParams } from "../../helpers/spreedlySetup";
@@ -12,7 +12,7 @@ import PhoneInput from "react-phone-number-input";
 import flags from "react-phone-number-input/flags";
 import "react-phone-number-input/style.css";
 import FooterComponent from "../../layout/FooterComponent";
-import CouponComponent from "../../layout/reusable/coupon/CouponComponent";
+import CouponComponent from "../../coupon/CouponComponent";
 
 const MainFormComponent = (props) => {
   const [processingPayment, setProcessingPayment] = useState(false);
@@ -197,7 +197,7 @@ const MainFormComponent = (props) => {
     <form
       onSubmit={handleSubmit}
       id="CompleteProfileMainFormContainer"
-      className="fsSneX"
+      className="div__class__holder"
     >
       <input type="hidden" name="pmnts_id" id="pmnts_id" />
       <input
@@ -205,18 +205,21 @@ const MainFormComponent = (props) => {
         name="payment_method_token"
         id="payment_method_token"
       />
-      <div id="RowWrapper" className="djiNSH row">
-        <h4 id="CompleteProfileHeaderText" className="lgqJFl eKvixq">
+      <div id="RowWrapper" className="RowWrapperDiv rowDiv">
+        <h4
+          id="CompleteProfileHeaderText"
+          className="CompleteProfileHeaderText__el CompleteHeaderText__h4"
+        >
           Your information
         </h4>
-        <h4 id="ValidationErrorText" className="bNA-dtG"></h4>
+        <h4 id="ValidationErrorText" className="ValidationErrorText"></h4>
       </div>
       <span id="Marginer" width={5} className="gDwDep"></span>
       <input
         name="email"
         placeholder="Email"
         id="email"
-        className={`fIfmaf gRXGR form-control ${
+        className={`inputClass gRXGR new-form-control ${
           errors.email && touched.email && "input-error"
         }`}
         autoFocus
@@ -238,14 +241,14 @@ const MainFormComponent = (props) => {
         onChange={(value) => setPhone(value)}
         tabIndex={2}
       />
-      <div id="RowWrapper" className="djiNSH row">
+      <div id="RowWrapper" className="RowWrapperDiv rowDiv">
         <input
           data-testid="fullName"
           name="fullName"
           autoComplete="given-name"
           placeholder="First and last name"
           id="fullName"
-          className={`fIfmaf bjckf form-control ${
+          className={`inputClass input__el new-form-control ${
             errors.fullName && touched.fullName && "input-error"
           }`}
           style={{
@@ -264,27 +267,27 @@ const MainFormComponent = (props) => {
             <p className="error">{errors.fullName}</p>
           )}
       </div>
-      <span id="Marginer" className="ieymL"></span>
+      <span id="Marginer" className="inputcl__el"></span>
 
-      <div id="RowWrapper" className="djiNSH row">
-        <h4 id="CompleteProfileHeaderText" className="lgqJFl eKvixq">
+      <div id="RowWrapper" className="RowWrapperDiv rowDiv">
+        <h4
+          id="CompleteProfileHeaderText"
+          className="CompleteProfileHeaderText__el CompleteHeaderText__h4"
+        >
           Payment method
         </h4>
-        <h4 id="ValidationErrorText" className="bNA-dtG"></h4>
+        <h4 id="ValidationErrorText" className="ValidationErrorText"></h4>
       </div>
 
-      <span id="Marginer" className="bLmTAm"></span>
-      <div id="RowWrapper" className="sc-gKPRtg djiNSH row">
+      <span id="Marginer" className="Marginer__el"></span>
+      <div id="RowWrapper" className="RowWrapperDiv rowDiv">
         <div
           id="CardInputContainer"
-          className="sc-bTTELM sc-gsGlKL dIVaVV XJnCb row"
+          className="CardInputContainer CardInputContainer__el rowDiv"
         >
-          <div id="PaymentInputsWrapper" className="sc-dwnOUR clLfEp">
-            <div className="sc-UpCWa ecUfhz">
-              <span
-                id="cc-number"
-                className="sc-GKYbw fQAZmq vgs-collect-container__empty vgs-collect-container__invalid vgs-collect-container__touched"
-              >
+          <div id="PaymentInputsWrapper" className="PaymentInputsWrapper">
+            <div className="PaymentInputsWrapper__div__container">
+              <span id="cc-number" className="ccSpan__div">
                 <div
                   id="spreedly-number"
                   type="tel"
@@ -298,19 +301,16 @@ const MainFormComponent = (props) => {
                 <img
                   src="data:image/svg+xml,%3csvg width='39' height='24' viewBox='0 0 39 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3e %3crect x='0.5' y='0.5' width='38' height='23' rx='2.5' fill='white' stroke='%23A8B3C1'/%3e %3crect x='3' y='12' width='33' height='2.25' rx='1.125' fill='%23A8B3C1'/%3e %3crect x='3' y='16.5' width='7.5' height='2.25' rx='1.125' fill='%23A8B3C1'/%3e %3crect x='12' y='16.5' width='7.5' height='2.25' rx='1.125' fill='%23A8B3C1'/%3e %3crect x='28.5' y='16.5' width='7.5' height='4.5' rx='0.5' fill='%23A8B3C1'/%3e %3crect x='3' y='3' width='6.75' height='5.25' rx='0.5' fill='%23A8B3C1'/%3e %3c/svg%3e"
                   alt="Card Icon"
-                  className="icon css-1jd8m52  card-icon"
+                  className="cardIcon__el"
                 ></img>
               </span>
             </div>
           </div>
-          <div id="PaymentInputsWrapper" className="sc-dwnOUR cmcdvS">
-            <div className="sc-UpCWa lciJdD">
-              <span
-                id="cc-expiration-date"
-                className="sc-GKYbw fQAZmq vgs-collect-container__empty vgs-collect-container__invalid vgs-collect-container__touched"
-              >
+          <div id="PaymentInputsWrapper" className="PaymentInputsWrapper_div">
+            <div className="paymentInput__div">
+              <span id="cc-expiration-date" className="ccSpan__div">
                 <input
-                  className="css-10xyftw invalid empty card-exp"
+                  className="card-exp"
                   autoComplete="cc-exp"
                   placeholder="MM / YY"
                   separator=" / "
@@ -324,17 +324,14 @@ const MainFormComponent = (props) => {
               </span>
             </div>
           </div>
-          <div id="PaymentInputsWrapper" className="sc-dwnOUR gXftSI">
-            <div className="sc-UpCWa bkNiHc">
-              <span
-                id="cc-cvc"
-                className="sc-GKYbw fQAZmq vgs-collect-container__empty vgs-collect-container__invalid"
-              >
+          <div id="PaymentInputsWrapper" className="InputsWrapper_div">
+            <div className="WrapperDiv__holder">
+              <span id="cc-cvc" className="ccSpan__div">
                 <div
                   type="tel"
                   id="spreedly-cvv"
                   name="spreedly-cvv"
-                  className="css-10xyftw invalid empty card-cvv"
+                  className="card-cvv"
                   autoComplete="cc-csc"
                   placeholder="CVC"
                   aria-label="Card Security Code"
@@ -346,7 +343,7 @@ const MainFormComponent = (props) => {
           </div>
         </div>
       </div>
-      <span id="Marginer" className="ieymL"></span>
+      <span id="Marginer" className="inputcl__el"></span>
       <ShippingComponent
         values={values}
         errors={errors}
@@ -357,21 +354,21 @@ const MainFormComponent = (props) => {
         handleCountry={handleCountry}
         countryValue={countryValue}
       />
-      <span id="Marginer" className="ieymL"></span>
-      <div id="CartExtraFeesMainContainer" className="hkDEcB"></div>
+      <span id="Marginer" className="inputcl__el"></span>
+      <div id="CartExtraFeesMainContainer" className="CartContainer__div"></div>
       <CouponComponent
         displayCoupon={displayCoupon}
         couponField={couponField}
         handleCouponClick={handleCouponClick}
         couponValue={couponValue}
       />
-      <span id="Marginer" className="ieymL"></span>
+      <span id="Marginer" className="inputcl__el"></span>
       <button
         onClick={submitPaymentForm}
         type="submit"
         height="50px"
         id="submit-button"
-        className={`submit-btn ${
+        className={`submitBtn ${
           (values.fullName.length === 0 && "disabled") ||
           (errors.fullName && "disabled") ||
           countryValue === ""
@@ -387,7 +384,7 @@ const MainFormComponent = (props) => {
       >
         {processingPayment ? "Processing..." : "Complete Purchase"}
       </button>
-      <span id="Marginer" className="ieymd"></span>
+      <span id="Marginer" className="Marginer__Div"></span>
       <FooterComponent />
     </form>
   );
